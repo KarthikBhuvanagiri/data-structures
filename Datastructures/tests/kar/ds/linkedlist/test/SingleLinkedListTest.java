@@ -200,9 +200,9 @@ class SingleLinkedListTest {
 	@Test
 	void testDeleteAtOnEmptyList() {
 		SingleLinkedList list = new SingleLinkedList();
-		boolean isSuccess = list.deleteAt(0);
+		Object data = list.deleteAt(0);
 		
-		assertFalse(isSuccess);
+		assertNull(data);
 		assertSizeAndContent(0, null, list);
 	}
 	
@@ -210,18 +210,18 @@ class SingleLinkedListTest {
 	void testDeleteAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
 		SingleLinkedList list = new SingleLinkedList(content);
-		boolean isSuccess = list.deleteAt(-1);
+		Object data = list.deleteAt(-1);
 		
-		assertFalse(isSuccess);
+		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testDeleteAtIndexZero() {
 		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.deleteAt(0);
+		Object data = list.deleteAt(0);
 		
-		assertTrue(isSuccess);
+		assertEquals(0, data);
 		Object[] expectedContent = new Object[]{1,2,3};
 		assertSizeAndContent(expectedContent.length, expectedContent , list);
 	}
@@ -229,9 +229,9 @@ class SingleLinkedListTest {
 	@Test
 	void testDeleteAtIndexTwo() {
 		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.deleteAt(2);
+		Object data = list.deleteAt(2);
 		
-		assertTrue(isSuccess);
+		assertEquals(2, data);
 		Object[] expectedContent = new Object[]{0,1,3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
@@ -239,9 +239,9 @@ class SingleLinkedListTest {
 	@Test
 	void testDeleteAtLastIndex() {
 		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.deleteAt(list.getSize()-1);
+		Object data = list.deleteAt(list.getSize()-1);
 		
-		assertTrue(isSuccess);
+		assertEquals(3, data);
 		Object[] expectedContent = new Object[]{0,1,2};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
@@ -250,9 +250,9 @@ class SingleLinkedListTest {
 	void testDeleteAtIndexEqualsSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
 		SingleLinkedList list = new SingleLinkedList(content);
-		boolean isSuccess = list.deleteAt(list.getSize());
+		Object data = list.deleteAt(list.getSize());
 		
-		assertFalse(isSuccess);
+		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
 	}
 	
@@ -260,18 +260,18 @@ class SingleLinkedListTest {
 	void testDeleteAtIndexGreaterThanSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
 		SingleLinkedList list = new SingleLinkedList(content);
-		boolean isSuccess = list.deleteAt(list.getSize()+1);
+		Object data = list.deleteAt(list.getSize()+1);
 		
-		assertFalse(isSuccess);
+		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testDeleteAtOnListWithOneItem() {
 		SingleLinkedList list = new SingleLinkedList(new Integer[] {0});
-		boolean isSuccess = list.deleteAt(0);
+		Object data = list.deleteAt(0);
 		
-		assertTrue(isSuccess);
+		assertEquals(0, data);
 		assertSizeAndContent(0, null, list);
 	}
 	

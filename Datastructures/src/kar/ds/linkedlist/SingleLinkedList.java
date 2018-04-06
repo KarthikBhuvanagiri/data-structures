@@ -111,11 +111,10 @@ public class SingleLinkedList {
 		return isSuccess;
 	}
 	
-	public boolean deleteAt(int index) {
+	public Object deleteAt(int index) {
 		if(isEmpty())
-			return false;
+			return null;
 		
-		boolean isSuccess = false;
 		Node nodeToDelete = getNodeAt(index);
 		if(nodeToDelete != null) {
 			if(nodeToDelete == head && nodeToDelete == tail) {
@@ -128,9 +127,8 @@ public class SingleLinkedList {
 					previousNode.nextNode = nodeToDelete.nextNode;
 			}
 			noOfNodes--;
-			isSuccess = true;
 		}
-		return isSuccess;
+		return nodeToDelete != null ? nodeToDelete.data : null;
 	}
 	
 	public Object getDataAt(int index) {

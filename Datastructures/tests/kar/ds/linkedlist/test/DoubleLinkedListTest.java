@@ -212,9 +212,9 @@ class DoubleLinkedListTest {
 	@Test
 	void testDeleteAtOnEmptyList() {
 		DoubleLinkedList list = new DoubleLinkedList();
-		boolean isSuccess = list.deleteAt(0);
+		Object data = list.deleteAt(0);
 		
-		assertFalse(isSuccess);
+		assertNull(data);
 		assertSizeAndContent(0, null, list);
 	}
 	
@@ -222,18 +222,18 @@ class DoubleLinkedListTest {
 	void testDeleteAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
 		DoubleLinkedList list = new DoubleLinkedList(content);
-		boolean isSuccess = list.deleteAt(-1);
+		Object data = list.deleteAt(-1);
 		
-		assertFalse(isSuccess);
+		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testDeleteAtIndexZero() {
 		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.deleteAt(0);
+		Object data = list.deleteAt(0);
 		
-		assertTrue(isSuccess);
+		assertEquals(0, data);
 		Object[] expectedContent = new Object[]{1,2,3};
 		assertSizeAndContent(expectedContent.length, expectedContent , list);
 	}
@@ -241,9 +241,9 @@ class DoubleLinkedListTest {
 	@Test
 	void testDeleteAtIndexTwo() {
 		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.deleteAt(2);
+		Object data = list.deleteAt(2);
 		
-		assertTrue(isSuccess);
+		assertEquals(2, data);
 		Object[] expectedContent = new Object[]{0,1,3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
@@ -251,9 +251,9 @@ class DoubleLinkedListTest {
 	@Test
 	void testDeleteAtLastIndex() {
 		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.deleteAt(list.getSize()-1);
+		Object data = list.deleteAt(list.getSize()-1);
 		
-		assertTrue(isSuccess);
+		assertEquals(3, data);
 		Object[] expectedContent = new Object[]{0,1,2};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
@@ -262,9 +262,9 @@ class DoubleLinkedListTest {
 	void testDeleteAtIndexEqualsSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
 		DoubleLinkedList list = new DoubleLinkedList(content);
-		boolean isSuccess = list.deleteAt(list.getSize());
+		Object data = list.deleteAt(list.getSize());
 		
-		assertFalse(isSuccess);
+		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
 	}
 	
@@ -272,18 +272,18 @@ class DoubleLinkedListTest {
 	void testDeleteAtIndexGreaterThanSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
 		DoubleLinkedList list = new DoubleLinkedList(content);
-		boolean isSuccess = list.deleteAt(list.getSize()+1);
+		Object data = list.deleteAt(list.getSize()+1);
 		
-		assertFalse(isSuccess);
+		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testDeleteAtOnListWithOneItem() {
 		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0});
-		boolean isSuccess = list.deleteAt(0);
+		Object data = list.deleteAt(0);
 		
-		assertTrue(isSuccess);
+		assertEquals(0, data);
 		assertSizeAndContent(0, null, list);
 	}
 	

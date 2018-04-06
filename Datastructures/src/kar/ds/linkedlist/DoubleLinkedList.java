@@ -136,18 +136,16 @@ public class DoubleLinkedList {
 		return isSuccess;
 	}
 	
-	public boolean deleteAt(int index) {
+	public Object deleteAt(int index) {
 		if(isEmpty())
-			return false;
+			return null;
 		
-		boolean isSuccess = false;
 		Node nodeToDelete = getNodeAt(index);
 		if(nodeToDelete != null) {
 			removeNode(nodeToDelete);
 			noOfNodes--;
-			isSuccess = true;
 		}
-		return isSuccess;
+		return nodeToDelete != null ? nodeToDelete.data : null;
 	}
 	
 	public Object getDataAt(int index) {
