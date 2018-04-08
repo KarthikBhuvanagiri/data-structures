@@ -17,6 +17,11 @@ public class Stack extends SingleLinkedList {
 	}
 
 	@Override
+	public void insert(Object data) {
+		throw new StackException("Cannot insert into the stack!");
+	}
+	
+	@Override
 	public boolean insertAt(int index, Object data) {
 		throw new StackException("Cannot insert at random location in the stack!");
 	}

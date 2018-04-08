@@ -123,6 +123,8 @@ public class SingleLinkedList {
 				head = head.nextNode;
 			} else {
 				Node previousNode = getNodeAt(index - 1);
+				if(nodeToDelete == tail)
+					tail = previousNode;
 				if(previousNode != null)
 					previousNode.nextNode = nodeToDelete.nextNode;
 			}

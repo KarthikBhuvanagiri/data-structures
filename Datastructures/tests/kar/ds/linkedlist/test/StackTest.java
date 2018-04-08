@@ -81,6 +81,20 @@ class StackTest {
 	}
 	
 	@Test
+	void testEmptyStackByPoppingAllItems() {
+		Stack stack = new Stack();
+		stack.push(0);
+		stack.push(1);
+		stack.push(2);
+
+		stack.pop();
+		stack.pop();
+		stack.pop();
+		
+		assertSizeAndContent(0, null, stack);
+	}
+	
+	@Test
 	void testPeekEmptyStack() {
 		Stack stack = new Stack();
 		Object data = stack.peek();
