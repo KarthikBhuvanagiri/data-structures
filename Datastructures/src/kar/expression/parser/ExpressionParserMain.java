@@ -17,8 +17,8 @@ public class ExpressionParserMain {
 		CommandLineParser parser = new DefaultParser();
 		Options options = new Options();
 		options.addOption("i", true, "input expression");
-		options.addOption("to", true, "convert input expression to postfix/prefix/infix");
-		options.addOption("eval", true, "evaluate input expression");
+		options.addOption("to", true, "convert input expression to postfix/prefix");
+		//options.addOption("eval", true, "evaluate input expression");
 		printHelp();
 		while(true) {
 			try {
@@ -38,10 +38,16 @@ public class ExpressionParserMain {
 					String inputExpression = command.getOptionValue("i");
 					if(command.hasOption("to")) {
 						String conversion = command.getOptionValue("to");
-						if(conversion != null && conversion.equals("postfix")) {
-							convertToPostFix(inputExpression);
-						}else {
-							System.out.println("Invalid value for conversion");
+						if(conversion != null) {
+							if(conversion.equals("postfix")) {
+								convertToPostFix(inputExpression);
+							}else if(conversion.equals("prefix")) {
+								convertToPreFix(inputExpression);
+							}else {
+								System.out.println("Invalid value for conversion");
+							}
+						} else {
+							System.out.println("Value for conversion option missing");
 						}
 					}else {
 						System.out.println("Conversion option missing");
@@ -51,6 +57,8 @@ public class ExpressionParserMain {
 				}
 			} catch (ParseException e) {
 				printHelp();
+			} catch (MalformedExpressionException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 		
@@ -58,13 +66,19 @@ public class ExpressionParserMain {
 	
 	private static void printHelp() {
 		System.out.println("Usage 1: -i <input-expression> -to <postfix/prefix/infix>");
-		System.out.println("Usage 2: -i <input-expression> -eval");
-		System.out.println("Usage 3: quit");
+		//System.out.println("Usage 2: -i <input-expression> -eval");
+		System.out.println("Usage 2: quit");
 	}
 	
-	private static void convertToPostFix(String inputExpression) {
-		ExpressionParser expressionParser = new ExpressionParser(inputExpression);
-		String postFixExpression = expressionParser.toPostFix();
+	private static void convertToPostFix(String inputExpression) throws MalformedExpressionException {
+		ExpressionParser expressionParser = new ExpressionParser(new Infix(inputExpression));
+		Expression postFixExpression = expressionParser.toPostfix();
 		System.out.println(postFixExpression);
+	}
+	
+	private static void convertToPreFix(String inputExpression) throws MalformedExpressionException {
+		ExpressionParser expressionParser = new ExpressionParser(new Infix(inputExpression));
+		Expression preFixExpression = expressionParser.toPrefix();
+		System.out.println(preFixExpression);
 	}
 }

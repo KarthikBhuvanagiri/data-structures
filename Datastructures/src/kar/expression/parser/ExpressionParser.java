@@ -4,10 +4,10 @@ import kar.ds.stack.Stack;
 
 public class ExpressionParser {
 	
-	private String expression;
+	private Infix infixExpression;
 	
-	public ExpressionParser(String expression) {
-		this.expression = expression.trim();
+	public ExpressionParser(Infix infixExpression) {
+		this.infixExpression = infixExpression;
 	}
 
 	private boolean isOperand(char c) {
@@ -79,8 +79,9 @@ public class ExpressionParser {
 		return precendence;
 	}
 	
-	public String toPostFix() {
+	public Expression toPostfix() {
 		String postFixExpression = "";
+		String expression = infixExpression.getExpression();
 		int noOfChars = expression.length();
 		Stack stack = new Stack();
 		for(int i=0; i<noOfChars; i++) {
@@ -120,14 +121,28 @@ public class ExpressionParser {
 		
 		while(!stack.isEmpty()) {
 			char itemInStack = (char) stack.pop();
-			if(itemInStack == '(' || itemInStack == ')') {
-				postFixExpression = "Parenthesis mismatch!!";
-				break;
-			}else {
-				postFixExpression = postFixExpression + itemInStack;
-			}
+			postFixExpression = postFixExpression + itemInStack;
 		}
 		
-		return postFixExpression;
+		return new Postfix(postFixExpression);
+	}
+	
+	public Expression toPrefix() throws MalformedExpressionException {
+		String expression = infixExpression.getExpression();
+		StringBuilder expressionInReverse = new StringBuilder(expression).reverse();
+		int noOfChars = expressionInReverse.length();
+		for(int i=0; i<noOfChars; i++) {
+			char charAti = expressionInReverse.charAt(i);
+			if(charAti == '(') {
+				expressionInReverse.setCharAt(i, ')');
+			}else if(charAti == ')') {
+				expressionInReverse.setCharAt(i, '(');
+			}
+		}
+		String reverseExpression = expressionInReverse.toString();
+		ExpressionParser expressionParser = new ExpressionParser(new Infix(reverseExpression));
+		String postfixExpression = expressionParser.toPostfix().getExpression();
+		String prefixExpression = new StringBuilder(postfixExpression).reverse().toString();
+		return new Prefix(prefixExpression);
 	}
 }
