@@ -1,4 +1,4 @@
-package kar.expression.parser;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,6 +9,11 @@ import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
+import kar.expression.parser.Expression;
+import kar.expression.parser.ExpressionParser;
+import kar.expression.parser.Infix;
+import kar.expression.parser.MalformedExpressionException;
 
 public class ExpressionParserMain {
 

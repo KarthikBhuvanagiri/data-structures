@@ -33,8 +33,7 @@ public class Infix implements Expression {
 	
 	@Override
 	public double evaluate() {
-		// TODO Auto-generated method stub
-		return 0;
+		return new ExpressionParser(this).toPostfix().evaluate();
 	}
 	
 	@Override

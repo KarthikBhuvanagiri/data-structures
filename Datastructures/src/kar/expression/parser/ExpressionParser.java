@@ -10,7 +10,7 @@ public class ExpressionParser {
 		this.infixExpression = infixExpression;
 	}
 
-	private boolean isOperand(char c) {
+	static boolean isOperand(char c) {
 		boolean isOperand = true;
 		switch(c) {
 		case '+':
@@ -25,7 +25,7 @@ public class ExpressionParser {
 		return isOperand;
 	}
 	
-	private boolean isOperator(char c) {
+	static boolean isOperator(char c) {
 		boolean isOperator = false;
 		switch(c) {
 		case '+':
@@ -87,7 +87,7 @@ public class ExpressionParser {
 		for(int i=0; i<noOfChars; i++) {
 			char c = expression.charAt(i);
 			if(isOperand(c)) {
-				postFixExpression = postFixExpression + c;
+				postFixExpression = postFixExpression + c + " ";
 			}else if(isOperator(c)){
 				if(stack.isEmpty()) {
 					stack.push(c);
@@ -100,7 +100,7 @@ public class ExpressionParser {
 							char operatorInStack = (char) stack.pop();
 //							if(operatorInStack == '(')
 //								break;
-							postFixExpression = postFixExpression + operatorInStack;
+							postFixExpression = postFixExpression + operatorInStack + " ";
 						}
 						stack.push(c);
 					}
@@ -113,7 +113,7 @@ public class ExpressionParser {
 					if(operatorInStack == '(') {
 						break;
 					}else {
-						postFixExpression = postFixExpression + operatorInStack;
+						postFixExpression = postFixExpression + operatorInStack + " ";
 					}
 				}
 			}
@@ -121,7 +121,7 @@ public class ExpressionParser {
 		
 		while(!stack.isEmpty()) {
 			char itemInStack = (char) stack.pop();
-			postFixExpression = postFixExpression + itemInStack;
+			postFixExpression = postFixExpression + itemInStack + " ";
 		}
 		
 		return new Postfix(postFixExpression);
