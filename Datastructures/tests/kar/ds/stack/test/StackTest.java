@@ -1,4 +1,4 @@
-package kar.ds.linkedlist.test;
+package kar.ds.stack.test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
