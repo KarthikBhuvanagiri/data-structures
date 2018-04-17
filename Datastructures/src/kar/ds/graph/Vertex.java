@@ -30,9 +30,7 @@ public class Vertex {
 	}
 	
 	public void addAdjacentVertex(Vertex v) {
-		if(!adjacentVertices.contains(v)) {
-			adjacentVertices.add(v);
-		}
+		adjacentVertices.add(v);
 	}
 	
 	public void removeAdjacentVertex(Vertex v) {
@@ -41,6 +39,11 @@ public class Vertex {
 	
 	@Override
 	public String toString() {
-		return value + " -> " + adjacentVertices.toString();
+		String adjVertices = "[";
+		for(Vertex adjacentVertex : adjacentVertices) {
+			adjVertices = adjVertices + " " + adjacentVertex.getValue();
+		}
+		adjVertices = adjVertices + " ]";
+		return value + " -> " + adjVertices;
 	}
 }

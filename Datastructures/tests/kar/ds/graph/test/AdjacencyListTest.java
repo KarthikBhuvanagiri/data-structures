@@ -42,13 +42,13 @@ class AdjacencyListTest {
 		graph.addVertex("B");
 		graph.addVertex("C");
 		
-		graph.removeVertext("B");
+		graph.removeVertex("B");
 		assertEquals(2, graph.getNumberOfVertices());
 		
-		graph.removeVertext("A");
+		graph.removeVertex("A");
 		assertEquals(1, graph.getNumberOfVertices());
 		
-		graph.removeVertext("C");
+		graph.removeVertex("C");
 		assertEquals(0, graph.getNumberOfVertices());
 	}
 
