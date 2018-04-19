@@ -12,6 +12,7 @@ import org.apache.commons.cli.ParseException;
 import kar.ds.graph.AdjacencyList;
 import kar.ds.graph.Graph;
 import kar.ds.graph.GraphException;
+import kar.graph.utils.GraphUtils;
 
 public class GraphMain {
 
@@ -44,6 +45,8 @@ public class GraphMain {
 					}else {
 						System.out.println("Invalid option or arguments to print");
 					}
+				}else if(commandLine.hasOption("dfs")) {
+					handleDFS(commandLine);
 				}else if(commandLine.hasOption("h")) {
 					printHelp();
 				}else if(commandLine.hasOption("q")) {
@@ -58,6 +61,45 @@ public class GraphMain {
 			} catch (GraphException e) {
 				System.out.println(e.getMessage());
 			}
+		}
+	}
+	
+	private static void handleDFS(CommandLine cl) {
+		String dfsStrategy = cl.getOptionValue("dfs");
+		if(dfsStrategy != null && (dfsStrategy = dfsStrategy.trim()).length() != 0) {
+			if(dfsStrategy.equals("r")) {
+				handleRecursiveDFS(cl);
+			}else if(dfsStrategy.equals("i")) {
+				handleIterativeDFS(cl);
+			}else {
+				System.out.println("Invalid argument for option dfs");
+			}
+		}else {
+			System.out.println("Argument missing for option dfs");
+		}
+	}
+	
+	private static void handleRecursiveDFS(CommandLine cl) {
+		String startingVertex = cl.getOptionValue("f");
+		if(startingVertex != null && (startingVertex = startingVertex.trim()).length() != 0) {
+			Object[] traversedVertices = GraphUtils.traverseByRecursiveDFS(graph, startingVertex);
+			String out = "";
+			for(Object traversedVertex : traversedVertices) {
+				out = out + " " + traversedVertex;
+			}
+			System.out.println("Traversed vertices by recursive DFS : "+out);
+		}else {
+			System.out.println("Starting vertex missing for recursive DFS");
+		}
+	}
+	
+	private static void handleIterativeDFS(CommandLine cl) {
+		String startingVertex = cl.getOptionValue("f");
+		if(startingVertex != null && (startingVertex = startingVertex.trim()).length() != 0) {
+//			Object[] traversedVertices = GraphUtils.traverseByRecursiveDFS(graph, startingVertex);
+//			System.out.println("Traversed vertices by recursive DFS : "+traversedVertices);
+		}else {
+			System.out.println("Starting vertex missing for iterative DFS");
 		}
 	}
 	
@@ -144,6 +186,7 @@ public class GraphMain {
 		options.addOption("adj", true, "Adjacent");
 		options.addOption("size", false, "Size of graph");
 		options.addOption("graph", false, "Graph");
+		options.addOption("dfs", true, "Depth-First Search");
 		options.addOption("h", false, "Help");
 		options.addOption("q", false, "Quit");
 		
@@ -177,6 +220,8 @@ public class GraphMain {
 		System.out.println("-p -adj vx\t\tPrints adjacent vertices of vx");
 		System.out.println("-p -size\t\tPrints size of graph");
 		System.out.println("-p -graph\t\tPrints current graph");
+		System.out.println("-dfs r -f vx\t\tTraverse by Depth-First Search from given vertex recursively");
+		System.out.println("-dfs i -f vx\t\tTraverse by Depth-First Search from given vertex iteratively");
 		System.out.println("-h\t\t\tPrints this help");
 		System.out.println("-q\t\t\tQuit");
 	}
