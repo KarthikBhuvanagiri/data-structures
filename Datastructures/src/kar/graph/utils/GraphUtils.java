@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import kar.ds.graph.Graph;
+import kar.ds.stack.Stack;
 
 public class GraphUtils {
 
@@ -21,6 +22,23 @@ public class GraphUtils {
 			if(!visitedVertices.contains(adjacentVertex))
 				recursiveDFS(graph, adjacentVertex, visitedVertices);
 		}
+	}
+	
+	public static Object[] traverseByIterativeDFS(Graph graph, Object startingVertex) {
+		ArrayList visitedVertices = new ArrayList();
+		Stack stack = new Stack();
+		stack.push(startingVertex);
+		while(!stack.isEmpty()) {
+			Object vertex = stack.pop();
+			if(!visitedVertices.contains(vertex)) {
+				visitedVertices.add(vertex);
+				Set adjacentVertices = graph.getAdjacentVerticesOf(vertex);
+				for(Object adjacentVertex : adjacentVertices) {
+					stack.push(adjacentVertex);
+				}
+			}
+		}
+		return visitedVertices.toArray();
 	}
 
 }

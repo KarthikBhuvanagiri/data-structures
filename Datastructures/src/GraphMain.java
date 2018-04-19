@@ -96,8 +96,12 @@ public class GraphMain {
 	private static void handleIterativeDFS(CommandLine cl) {
 		String startingVertex = cl.getOptionValue("f");
 		if(startingVertex != null && (startingVertex = startingVertex.trim()).length() != 0) {
-//			Object[] traversedVertices = GraphUtils.traverseByRecursiveDFS(graph, startingVertex);
-//			System.out.println("Traversed vertices by recursive DFS : "+traversedVertices);
+			Object[] traversedVertices = GraphUtils.traverseByIterativeDFS(graph, startingVertex);
+			String out = "";
+			for(Object traversedVertex : traversedVertices) {
+				out = out + " " + traversedVertex;
+			}
+			System.out.println("Traversed vertices by iterative DFS : "+out);
 		}else {
 			System.out.println("Starting vertex missing for iterative DFS");
 		}
