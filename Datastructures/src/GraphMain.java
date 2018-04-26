@@ -47,6 +47,8 @@ public class GraphMain {
 					}
 				}else if(commandLine.hasOption("dfs")) {
 					handleDFS(commandLine);
+				}else if(commandLine.hasOption("bfs")) {
+					handleBFS(commandLine);
 				}else if(commandLine.hasOption("h")) {
 					printHelp();
 				}else if(commandLine.hasOption("q")) {
@@ -102,6 +104,49 @@ public class GraphMain {
 				out = out + " " + traversedVertex;
 			}
 			System.out.println("Traversed vertices by iterative DFS : "+out);
+		}else {
+			System.out.println("Starting vertex missing for iterative DFS");
+		}
+	}
+	
+	private static void handleBFS(CommandLine cl) {
+		String dfsStrategy = cl.getOptionValue("bfs");
+		if(dfsStrategy != null && (dfsStrategy = dfsStrategy.trim()).length() != 0) {
+			if(dfsStrategy.equals("r")) {
+				handleRecursiveBFS(cl);
+			}else if(dfsStrategy.equals("i")) {
+				handleIterativeBFS(cl);
+			}else {
+				System.out.println("Invalid argument for option bfs");
+			}
+		}else {
+			System.out.println("Argument missing for option bfs");
+		}
+	}
+	
+	private static void handleRecursiveBFS(CommandLine cl) {
+		String startingVertex = cl.getOptionValue("f");
+		if(startingVertex != null && (startingVertex = startingVertex.trim()).length() != 0) {
+			Object[] traversedVertices = GraphUtils.traverseByRecursiveBFS(graph, startingVertex);
+			String out = "";
+			for(Object traversedVertex : traversedVertices) {
+				out = out + " " + traversedVertex;
+			}
+			System.out.println("Traversed vertices by recursive BFS : "+out);
+		}else {
+			System.out.println("Starting vertex missing for recursive BFS");
+		}
+	}
+	
+	private static void handleIterativeBFS(CommandLine cl) {
+		String startingVertex = cl.getOptionValue("f");
+		if(startingVertex != null && (startingVertex = startingVertex.trim()).length() != 0) {
+			Object[] traversedVertices = GraphUtils.traverseByIterativeBFS(graph, startingVertex);
+			String out = "";
+			for(Object traversedVertex : traversedVertices) {
+				out = out + " " + traversedVertex;
+			}
+			System.out.println("Traversed vertices by iterative BFS : "+out);
 		}else {
 			System.out.println("Starting vertex missing for iterative DFS");
 		}
@@ -191,6 +236,7 @@ public class GraphMain {
 		options.addOption("size", false, "Size of graph");
 		options.addOption("graph", false, "Graph");
 		options.addOption("dfs", true, "Depth-First Search");
+		options.addOption("bfs", true, "Breadth-First Search");
 		options.addOption("h", false, "Help");
 		options.addOption("q", false, "Quit");
 		
@@ -226,6 +272,8 @@ public class GraphMain {
 		System.out.println("-p -graph\t\tPrints current graph");
 		System.out.println("-dfs r -f vx\t\tTraverse by Depth-First Search from given vertex recursively");
 		System.out.println("-dfs i -f vx\t\tTraverse by Depth-First Search from given vertex iteratively");
+		System.out.println("-bfs r -f vx\t\tTraverse by Breadth-First Search from given vertex recursively");
+		System.out.println("-bfs i -f vx\t\tTraverse by Breadth-First Search from given vertex iteratively");
 		System.out.println("-h\t\t\tPrints this help");
 		System.out.println("-q\t\t\tQuit");
 	}
