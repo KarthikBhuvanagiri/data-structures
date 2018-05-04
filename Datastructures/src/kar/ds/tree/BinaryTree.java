@@ -101,20 +101,44 @@ public class BinaryTree implements Tree {
 
 	@Override
 	public Object[] traverseInOrder() {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty())
+			return null;
+		
+		ArrayList visitedNodes = new ArrayList();
+		InOrderIterator iterator = new InOrderIterator(root);
+		while(iterator.hasNext()) {
+			TreeNode node = iterator.next();
+			visitedNodes.add(node.data);
+		}
+		return visitedNodes.toArray();
 	}
 
 	@Override
 	public Object[] traversePreOrder() {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty())
+			return null;
+		
+		ArrayList visitedNodes = new ArrayList();
+		PreOrderIterator iterator = new PreOrderIterator(root);
+		while(iterator.hasNext()) {
+			TreeNode node = iterator.next();
+			visitedNodes.add(node.data);
+		}
+		return visitedNodes.toArray();
 	}
 
 	@Override
 	public Object[] traversePostOrder() {
-		// TODO Auto-generated method stub
-		return null;
+		if(isEmpty())
+			return null;
+		
+		ArrayList visitedNodes = new ArrayList();
+		PostOrderIterator iterator = new PostOrderIterator(root);
+		while(iterator.hasNext()) {
+			TreeNode node = iterator.next();
+			visitedNodes.add(node.data);
+		}
+		return visitedNodes.toArray();
 	}
 
 }
