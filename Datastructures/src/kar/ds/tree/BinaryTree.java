@@ -27,6 +27,68 @@ public class BinaryTree implements Tree {
 			}
 		}
 	}
+	
+	public void insertAsLeftChildOf(Object parent, Object dataToInsert) {
+		if(isEmpty())
+			return;
+		
+		LevelOrderIterator iterator = new LevelOrderIterator(root);
+		TreeNode currentNode = null;
+		while(iterator.hasNext()) {
+			currentNode = iterator.next();
+			if(currentNode.data == parent) {
+				TreeNode newNode = new TreeNode(currentNode.leftNode, dataToInsert, null);
+				currentNode.leftNode = newNode;
+				break;
+			}
+		}
+	}
+	
+	public void insertAsRightChildOf(Object parent, Object dataToInsert) {
+		if(isEmpty())
+			return;
+		
+		LevelOrderIterator iterator = new LevelOrderIterator(root);
+		TreeNode currentNode = null;
+		while(iterator.hasNext()) {
+			currentNode = iterator.next();
+			if(currentNode.data == parent) {
+				TreeNode newNode = new TreeNode(null, dataToInsert, currentNode.leftNode);
+				currentNode.rightNode = newNode;
+				break;
+			}
+		}
+	}
+	
+	public void deleteLeftChildOf(Object parent) {
+		if(isEmpty())
+			return;
+		
+		LevelOrderIterator iterator = new LevelOrderIterator(root);
+		TreeNode currentNode = null;
+		while(iterator.hasNext()) {
+			currentNode = iterator.next();
+			if(currentNode.data == parent) {
+				currentNode.leftNode = null;
+				break;
+			}
+		}
+	}
+	
+	public void deleteRightChildOf(Object parent) {
+		if(isEmpty())
+			return;
+		
+		LevelOrderIterator iterator = new LevelOrderIterator(root);
+		TreeNode currentNode = null;
+		while(iterator.hasNext()) {
+			currentNode = iterator.next();
+			if(currentNode.data == parent) {
+				currentNode.rightNode = null;
+				break;
+			}
+		}
+	}
 
 	@Override
 	public void delete(Object data) {
