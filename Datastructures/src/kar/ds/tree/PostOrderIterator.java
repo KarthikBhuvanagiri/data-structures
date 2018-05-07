@@ -31,7 +31,7 @@ public class PostOrderIterator implements TreeIterator {
 	@Override
 	public TreeNode next() {
 		TreeNode nextNode = (TreeNode) stack.pop();
-		if(nextNode.rightNode == stack.peek()) {
+		while(nextNode.rightNode == stack.peek()) {
 			TreeNode currentNode = (TreeNode) stack.pop();
 			stack.push(nextNode);
 			traverseLeftSubTreeOf(currentNode);

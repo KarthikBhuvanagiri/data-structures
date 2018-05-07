@@ -62,12 +62,20 @@ class BinaryTreeTest {
 		return "A";
 	}
 	
+	protected Object[] getLevelOrderContentAfterInsertAtRightChildOfRoot() {
+		return new Object[] {"A","B","X","D","E","C","H","I","J","K","F","G","L","M","N","O"};
+	}
+	
 	protected Object[] getLevelOrderContentAfterInsertAsLeftChildOfRoot() {
 		return new Object[] {"A","X","C","B","F","G","D","E","L","M","N","O","H","I","J","K"};
 	}
 	
 	protected Object[] getLevelOrderContentAfterRootNodeDeletion() {
 		return new Object[] {"O","B","C","D","E","F","G","H","I","J","K","L","M","N"};
+	}
+	
+	protected Object[] getPreOrderContentAfterInsertAtRightChildOfRoot() {
+		return new Object[] {"A","B","D","H","I","E","J","K","X","C","F","L","M","G","N","O"};
 	}
 	
 	protected Object[] getPreOrderContentAfterInsertAsLeftChildOfRoot() {
@@ -78,12 +86,20 @@ class BinaryTreeTest {
 		return new Object[] {"O","B","D","H","I","E","J","K","C","F","L","M","G","N"};
 	}
 	
+	protected Object[] getInOrderContentAfterInsertAsRightChildOfRoot() {
+		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O","X"};
+	}
+	
 	protected Object[] getInOrderContentAfterInsertAsLeftChildOfRoot() {
 		return new Object[] {"H","D","I","B","J","E","K","X","A","L","F","M","C","N","G","O"};
 	}
 	
 	protected Object[] getInOrderContentAfterRootNodeDeletion() {
 		return new Object[] {"H","D","I","B","J","E","K","O","L","F","M","C","N","G"};
+	}
+	
+	protected Object[] getPostOrderContentAfterInsertAsRightChildOfRoot() {
+		return new Object[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","C","X","A"};
 	}
 	
 	protected Object[] getPostOrderContentAfterInsertAsLeftChildOfRoot() {
@@ -98,12 +114,20 @@ class BinaryTreeTest {
 		return "C";
 	}
 	
+	protected Object[] getLevelOrderContentAfterInsertAsRightChildOfInternalNode() {
+		return new Object[] {"A","B","C","D","E","F","X","H","I","J","K","L","M","G","N","O"};
+	}
+	
 	protected Object[] getLevelOrderContentAfterInsertAsLeftChildOfInternalNode() {
 		return new Object[] {"A","B","C","D","E","X","G","H","I","J","K","F","N","O","L","M"};
 	}
 	
 	protected Object[] getLevelOrderContentAfterInternalNodeDeletion() {
 		return new Object[] {"A","B","O","D","E","F","G","H","I","J","K","L","M","N"};
+	}
+	
+	protected Object[] getPreOrderContentAfterInsertAsRightChildOfInternalNode() {
+		return new Object[] {"A","B","D","H","I","E","J","K","C","F","L","M","X","G","N","O"};
 	}
 	
 	protected Object[] getPreOrderContentAfterInsertAsLeftChildOfInternalNode() {
@@ -114,12 +138,20 @@ class BinaryTreeTest {
 		return new Object[] {"A","B","D","H","I","E","J","K","O","F","L","M","G","N"};
 	}
 	
+	protected Object[] getInOrderContentAfterInsertAsRightChildOfInternalNode() {
+		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O","X"};
+	}
+	
 	protected Object[] getInOrderContentAfterInsertAsLeftChildOfInternalNode() {
 		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","X","C","N","G","O"};
 	}
 	
 	protected Object[] getInOrderContentAfterInternalNodeDeletion() {
 		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","O","N","G"};
+	}
+	
+	protected Object[] getPostOrderContentAfterInsertAsRightChildOfInternalNode() {
+		return new Object[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","X","C","A"};
 	}
 	
 	protected Object[] getPostOrderContentAfterInsertAsLeftChildOfInternalNode() {
@@ -134,12 +166,20 @@ class BinaryTreeTest {
 		return "L";
 	}
 	
+	protected Object[] getLevelOrderContentAfterInsertAsRightChildOfLeafNode() {
+		return new Object[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","X"};
+	}
+	
 	protected Object[] getLevelOrderContentAfterInsertAsLeftChildOfLeafNode() {
 		return new Object[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","X"};
 	}
 	
 	protected Object[] getLevelOrderContentAfterLeafNodeDeletion() {
 		return new Object[] {"A","B","C","D","E","F","G","H","I","J","K","O","M","N"};
+	}
+	
+	protected Object[] getPreOrderContentAfterInsertAsRightChildOfLeafNode() {
+		return new Object[] {"A","B","D","H","I","E","J","K","C","F","L","X","M","G","N","O"};
 	}
 	
 	protected Object[] getPreOrderContentAfterInsertAsLeftChildOfLeafNode() {
@@ -150,12 +190,20 @@ class BinaryTreeTest {
 		return new Object[] {"A","B","D","H","I","E","J","K","C","F","O","M","G","N"};
 	}
 	
+	protected Object[] getInOrderContentAfterInsertAsRightChildOfLeafNode() {
+		return new Object[] {"H","D","I","B","J","E","K","A","L","X","F","M","C","N","G","O"};
+	}
+	
 	protected Object[] getInOrderContentAfterInsertAsLeftChildOfLeafNode() {
 		return new Object[] {"H","D","I","B","J","E","K","A","X","L","F","M","C","N","G","O"};
 	}
 	
 	protected Object[] getInOrderContentAfterLeafNodeDeletion() {
 		return new Object[] {"H","D","I","B","J","E","K","A","O","F","M","C","N","G"};
+	}
+	
+	protected Object[] getPostOrderContentAfterInsertAsRightChildOfLeafNode() {
+		return new Object[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
 	}
 	
 	protected Object[] getPostOrderContentAfterInsertAsLeftChildOfLeafNode() {
@@ -233,32 +281,56 @@ class BinaryTreeTest {
 	@Test
 	void testInsertInEmptyTreeAsRightChildOf() {
 		BinaryTree tree = new BinaryTree();
-		tree.insertAsLeftChildOf("A", "B");
+		tree.insertAsRightChildOf("A", "B");
 		assertLevelOrderContent(null, tree);
 		assertPreOrderContent(null, tree);
 		assertInOrderContent(null, tree);
 		assertPostOrderContent(null, tree);
 	}
 	
-/*	@Test
+	@Test
 	void testInsertAsRightChildOfRoot() {
-		
+		Object[] expected = getTreeContent();
+		BinaryTree tree = (BinaryTree) createTree(expected);
+		tree.insertAsRightChildOf(getRootNode(), "X");
+		assertLevelOrderContent(getLevelOrderContentAfterInsertAtRightChildOfRoot(), tree);
+		assertPreOrderContent(getPreOrderContentAfterInsertAtRightChildOfRoot(), tree);
+		assertInOrderContent(getInOrderContentAfterInsertAsRightChildOfRoot(), tree);
+		assertPostOrderContent(getPostOrderContentAfterInsertAsRightChildOfRoot(), tree);
 	}
 	
 	@Test
 	void testInsertAsRightChildOfInternalNode() {
-		
+		Object[] expected = getTreeContent();
+		BinaryTree tree = (BinaryTree) createTree(expected);
+		tree.insertAsRightChildOf(getInternalNode(), "X");
+		assertLevelOrderContent(getLevelOrderContentAfterInsertAsRightChildOfInternalNode(), tree);
+		assertPreOrderContent(getPreOrderContentAfterInsertAsRightChildOfInternalNode(), tree);
+		assertInOrderContent(getInOrderContentAfterInsertAsRightChildOfInternalNode(), tree);
+		assertPostOrderContent(getPostOrderContentAfterInsertAsRightChildOfInternalNode(), tree);
 	}
 	
 	@Test
 	void testInsertAsRightChildOfLeafNode() {
-		
+		Object[] expected = getTreeContent();
+		BinaryTree tree = (BinaryTree) createTree(expected);
+		tree.insertAsRightChildOf(getLeafNode(), "X");
+		assertLevelOrderContent(getLevelOrderContentAfterInsertAsRightChildOfLeafNode(), tree);
+		assertPreOrderContent(getPreOrderContentAfterInsertAsRightChildOfLeafNode(), tree);
+		assertInOrderContent(getInOrderContentAfterInsertAsRightChildOfLeafNode(), tree);
+		assertPostOrderContent(getPostOrderContentAfterInsertAsRightChildOfLeafNode(), tree);
 	}
 	
 	@Test
 	void testInsertAsRightChildOfNonExistentNode() {
-		
-	}*/
+		Object[] expected = getTreeContent();
+		BinaryTree tree = (BinaryTree) createTree(expected);
+		tree.insertAsRightChildOf("Z", "X");
+		assertLevelOrderContent(getTreeContent(), tree);
+		assertPreOrderContent(getPreOrderContent(), tree);
+		assertInOrderContent(getInOrderContent(), tree);
+		assertPostOrderContent(getPostOrderContent(), tree);
+	}
 	
 	@Test
 	void testDeleteNodeFromEmptyTree() {

@@ -53,7 +53,7 @@ public class BinaryTree implements Tree {
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
 			if(currentNode.data == parent) {
-				TreeNode newNode = new TreeNode(null, dataToInsert, currentNode.leftNode);
+				TreeNode newNode = new TreeNode(currentNode.rightNode, dataToInsert, null);
 				currentNode.rightNode = newNode;
 				break;
 			}
