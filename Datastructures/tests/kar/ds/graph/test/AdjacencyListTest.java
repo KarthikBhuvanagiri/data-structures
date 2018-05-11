@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -20,13 +19,13 @@ class AdjacencyListTest {
 
 	@Test
 	void testEmptyGraph() {
-		Graph graph = new AdjacencyList();
+		Graph<String> graph = new AdjacencyList<String>();
 		assertEquals(0, graph.getNumberOfVertices());
 	}
 	
 	@Test
 	void testAddVertex() {
-		Graph graph = new AdjacencyList();
+		Graph<String> graph = new AdjacencyList<String>();
 		graph.addVertex("A");
 		assertEquals(1, graph.getNumberOfVertices());
 		graph.addVertex("B");
@@ -37,7 +36,7 @@ class AdjacencyListTest {
 
 	@Test
 	void testRemoveVertext() {
-		Graph graph = new AdjacencyList();
+		Graph<String> graph = new AdjacencyList<String>();
 		graph.addVertex("A");
 		graph.addVertex("B");
 		graph.addVertex("C");
@@ -54,7 +53,7 @@ class AdjacencyListTest {
 
 	@Test
 	void testAddEdgeBetween() {
-		Graph graph = new AdjacencyList();
+		Graph<String> graph = new AdjacencyList<String>();
 		graph.addVertex("A");
 		graph.addVertex("B");
 		graph.addVertex("C");
@@ -109,17 +108,17 @@ class AdjacencyListTest {
 		assertAdjacencyBetween("F", "C", graph, false);
 		assertAdjacencyBetween("F", "E", graph, false);
 		
-		assertAdjacentVerticesOf("A", new Object[]{"B", "E"}, graph);
-		assertAdjacentVerticesOf("B", new Object[]{"A", "C", "D", "E"}, graph);
-		assertAdjacentVerticesOf("C", new Object[]{"B"}, graph);
-		assertAdjacentVerticesOf("D", new Object[]{"B", "E", "F"}, graph);
-		assertAdjacentVerticesOf("E", new Object[]{"A", "B", "D"}, graph);
-		assertAdjacentVerticesOf("F", new Object[]{"D"}, graph);
+		assertAdjacentVerticesOf("A", new String[]{"B", "E"}, graph);
+		assertAdjacentVerticesOf("B", new String[]{"A", "C", "D", "E"}, graph);
+		assertAdjacentVerticesOf("C", new String[]{"B"}, graph);
+		assertAdjacentVerticesOf("D", new String[]{"B", "E", "F"}, graph);
+		assertAdjacentVerticesOf("E", new String[]{"A", "B", "D"}, graph);
+		assertAdjacentVerticesOf("F", new String[]{"D"}, graph);
 	}
 
 	@Test
 	void testRemoveEdgeBetween() {
-		Graph graph = new AdjacencyList();
+		Graph<String> graph = new AdjacencyList<String>();
 		graph.addVertex("A");
 		graph.addVertex("B");
 		graph.addVertex("C");
@@ -144,7 +143,7 @@ class AdjacencyListTest {
 		
 		graph.removeEdgeBetween("A", "B");
 		assertAdjacencyBetween("A", "B", graph, false);
-		assertAdjacentVerticesOf("A", new Object[]{"E"}, graph);
+		assertAdjacentVerticesOf("A", new String[]{"E"}, graph);
 		
 		graph.removeEdgeBetween("A", "E");
 		assertAdjacencyBetween("A", "E", graph, false);
@@ -152,11 +151,11 @@ class AdjacencyListTest {
 		
 		graph.removeEdgeBetween("B", "E");
 		assertAdjacencyBetween("B", "E", graph, false);
-		assertAdjacentVerticesOf("B", new Object[] {"C", "D"}, graph);
+		assertAdjacentVerticesOf("B", new String[] {"C", "D"}, graph);
 		
 		graph.removeEdgeBetween("B", "C");
 		assertAdjacencyBetween("B", "C", graph, false);
-		assertAdjacentVerticesOf("B", new Object[] {"D"}, graph);
+		assertAdjacentVerticesOf("B", new String[] {"D"}, graph);
 		
 		graph.removeEdgeBetween("B", "D");
 		assertAdjacencyBetween("B", "D", graph, false);
@@ -166,7 +165,7 @@ class AdjacencyListTest {
 		
 		graph.removeEdgeBetween("D", "F");
 		assertAdjacencyBetween("D", "F", graph, false);
-		assertAdjacentVerticesOf("D", new Object[] {"E"}, graph);
+		assertAdjacentVerticesOf("D", new String[] {"E"}, graph);
 		
 		graph.removeEdgeBetween("D", "E");
 		assertAdjacencyBetween("D", "E", graph, false);
@@ -177,7 +176,7 @@ class AdjacencyListTest {
 		assertAdjacentVerticesOf("F", null, graph);
 	}
 
-	void assertAdjacencyBetween(Object v1, Object v2, Graph graph, boolean expected) {
+	void assertAdjacencyBetween(String v1, String v2, Graph<String> graph, boolean expected) {
 		if(expected) {
 			assertTrue(graph.areAdjacent(v1, v2));
 		}else {
@@ -185,8 +184,8 @@ class AdjacencyListTest {
 		}
 	}
 	
-	void assertAdjacentVerticesOf(Object v1, Object[] expected, Graph graph) {
-		Set actual = graph.getAdjacentVerticesOf(v1);
+	void assertAdjacentVerticesOf(String v1, String[] expected, Graph<String> graph) {
+		Set<String> actual = graph.getAdjacentVerticesOf(v1);
 		if(expected != null)
 			assertEquals(new LinkedHashSet<>(Arrays.asList(expected)), actual);
 		else

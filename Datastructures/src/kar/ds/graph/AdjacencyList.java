@@ -4,71 +4,71 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class AdjacencyList implements Graph {
+public class AdjacencyList<T> implements Graph<T> {
 
-	private LinkedHashMap<Object, Vertex> vertices = new LinkedHashMap<Object, Vertex>();
+	private LinkedHashMap<T, Vertex<T>> vertices = new LinkedHashMap<T, Vertex<T>>();
 	
-	private void throwExceptionIfVertexNotExist(Object v) {
+	private void throwExceptionIfVertexNotExist(T v) {
 		if(!vertices.containsKey(v))
 			throw new GraphException("Vertex "+v+" not found");
 	}
 	
 	@Override
-	public void addVertex(Object vertex) {
+	public void addVertex(T vertex) {
 		if(!vertices.containsKey(vertex))
-			vertices.put(vertex, new Vertex(vertex));
+			vertices.put(vertex, new Vertex<T>(vertex));
 		else
 			throw new GraphException("Vertex "+vertex+" already exist");
 	}
 
 	@Override
-	public void removeVertex(Object vertex) {
+	public void removeVertex(T vertex) {
 		throwExceptionIfVertexNotExist(vertex);
-		Vertex v = vertices.remove(vertex);
-		Set<Vertex> adjacentVertices = v.getAdjacentVertices();
-		for(Vertex adjacentVertex : adjacentVertices) {
+		Vertex<T> v = vertices.remove(vertex);
+		Set<Vertex<T>> adjacentVertices = v.getAdjacentVertices();
+		for(Vertex<T> adjacentVertex : adjacentVertices) {
 			adjacentVertex.removeAdjacentVertex(v);
 		}
 	}
 
 	@Override
-	public void addEdgeBetween(Object vertex1, Object vertex2) {
+	public void addEdgeBetween(T vertex1, T vertex2) {
 		throwExceptionIfVertexNotExist(vertex1);
 		throwExceptionIfVertexNotExist(vertex2);
-		Vertex v1 = vertices.get(vertex1);
-		Vertex v2 = vertices.get(vertex2);
+		Vertex<T> v1 = vertices.get(vertex1);
+		Vertex<T> v2 = vertices.get(vertex2);
 		v1.addAdjacentVertex(v2);
 		v2.addAdjacentVertex(v1);
 	}
 
 	@Override
-	public void removeEdgeBetween(Object vertex1, Object vertex2) {
+	public void removeEdgeBetween(T vertex1, T vertex2) {
 		throwExceptionIfVertexNotExist(vertex1);
 		throwExceptionIfVertexNotExist(vertex2);
-		Vertex v1 = vertices.get(vertex1);
-		Vertex v2 = vertices.get(vertex2);
+		Vertex<T> v1 = vertices.get(vertex1);
+		Vertex<T> v2 = vertices.get(vertex2);
 		v1.removeAdjacentVertex(v2);
 		v2.removeAdjacentVertex(v1);
 	}
 
 	@Override
-	public boolean areAdjacent(Object vertex1, Object vertex2) {
+	public boolean areAdjacent(T vertex1, T vertex2) {
 		throwExceptionIfVertexNotExist(vertex1);
 		throwExceptionIfVertexNotExist(vertex2);
-		Vertex v1 = vertices.get(vertex1);
-		Vertex v2 = vertices.get(vertex2);
+		Vertex<T> v1 = vertices.get(vertex1);
+		Vertex<T> v2 = vertices.get(vertex2);
 		return v1.isAdjacentTo(v2) && v2.isAdjacentTo(v1);
 	}
 
 	@Override
-	public Set getAdjacentVerticesOf(Object vertex) {
+	public Set<T> getAdjacentVerticesOf(T vertex) {
 		throwExceptionIfVertexNotExist(vertex);
-		Vertex v = vertices.get(vertex);
-		Set<Vertex> adjacentVertices = v.getAdjacentVertices();
-		LinkedHashSet neighbours = null;
+		Vertex<T> v = vertices.get(vertex);
+		Set<Vertex<T>> adjacentVertices = v.getAdjacentVertices();
+		LinkedHashSet<T> neighbours = null;
 		if(adjacentVertices != null && !adjacentVertices.isEmpty()) {
-			neighbours = new LinkedHashSet();
-			for(Vertex adjacentVertex : adjacentVertices) {
+			neighbours = new LinkedHashSet<T>();
+			for(Vertex<T> adjacentVertex : adjacentVertices) {
 				neighbours.add(adjacentVertex.getValue());
 			}
 		}
@@ -81,46 +81,46 @@ public class AdjacencyList implements Graph {
 	}
 
 	@Override
-	public void addVertices(Object[] vertices) {
+	public void addVertices(T[] vertices) {
 		if(vertices == null || vertices.length == 0)
 			return;
-		for(Object vertext : vertices) {
+		for(T vertext : vertices) {
 			addVertex(vertext);
 		}
 	}
 
 	@Override
-	public void removeVertices(Object[] vertices) {
+	public void removeVertices(T[] vertices) {
 		if(vertices == null || vertices.length == 0)
 			return;
-		for(Object vertex : vertices) {
+		for(T vertex : vertices) {
 			removeVertex(vertex);
 		}
 	}
 
 	@Override
-	public void addEdgeFrom(Object fromVertex, Object toVertex) {
+	public void addEdgeFrom(T fromVertex, T toVertex) {
 		throwExceptionIfVertexNotExist(fromVertex);
 		throwExceptionIfVertexNotExist(toVertex);
-		Vertex v1 = vertices.get(fromVertex);
-		Vertex v2 = vertices.get(toVertex);
+		Vertex<T> v1 = vertices.get(fromVertex);
+		Vertex<T> v2 = vertices.get(toVertex);
 		v1.addAdjacentVertex(v2);
 	}
 
 	@Override
-	public void removeEdgeFrom(Object fromVertex, Object toVertex) {
+	public void removeEdgeFrom(T fromVertex, T toVertex) {
 		throwExceptionIfVertexNotExist(fromVertex);
 		throwExceptionIfVertexNotExist(toVertex);
-		Vertex v1 = vertices.get(fromVertex);
-		Vertex v2 = vertices.get(toVertex);
+		Vertex<T> v1 = vertices.get(fromVertex);
+		Vertex<T> v2 = vertices.get(toVertex);
 		v1.removeAdjacentVertex(v2);
 	}
 	
 	@Override
 	public String toString() {
 		String toString = "";
-		Set keys = vertices.keySet();
-		for(Object key : keys) {
+		Set<T> keys = vertices.keySet();
+		for(T key : keys) {
 			toString = toString + vertices.get(key) + "\n";
 		}
 		return toString;
