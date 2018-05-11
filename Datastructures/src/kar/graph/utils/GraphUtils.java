@@ -1,5 +1,6 @@
 package kar.graph.utils;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -10,68 +11,76 @@ import kar.ds.stack.Stack;
 
 public class GraphUtils {
 
-	public static Object[] traverseByRecursiveDFS(Graph graph, Object startingVertex) {
-		ArrayList visitedVertices = new ArrayList();
+	public static <T> T[] traverseByRecursiveDFS(Graph<T> graph, T startingVertex) {
+		ArrayList<T> visitedVertices = new ArrayList<T>();
 		recursiveDFS(graph, startingVertex, visitedVertices);
-		return visitedVertices.toArray();
+		@SuppressWarnings("unchecked")
+		T[] out = (T[]) Array.newInstance(startingVertex.getClass(), visitedVertices.size());
+		return visitedVertices.toArray(out);
 	}
 	
-	private static void recursiveDFS(Graph graph, Object vertex, List visitedVertices) {
+	private static <T> void recursiveDFS(Graph<T> graph, T vertex, List<T> visitedVertices) {
 		visitedVertices.add(vertex);
-		Set adjacentVertices = graph.getAdjacentVerticesOf(vertex);
+		Set<T> adjacentVertices = graph.getAdjacentVerticesOf(vertex);
 		if(adjacentVertices != null && !adjacentVertices.isEmpty()) {
-			for(Object adjacentVertex : adjacentVertices) {
+			for(T adjacentVertex : adjacentVertices) {
 				if(!visitedVertices.contains(adjacentVertex))
 					recursiveDFS(graph, adjacentVertex, visitedVertices);
 			}
 		}
 	}
 	
-	public static Object[] traverseByIterativeDFS(Graph graph, Object startingVertex) {
-		ArrayList visitedVertices = new ArrayList();
-		Stack stack = new Stack();
+	public static <T> T[] traverseByIterativeDFS(Graph<T> graph, T startingVertex) {
+		ArrayList<T> visitedVertices = new ArrayList<T>();
+		Stack<T> stack = new Stack<T>();
 		stack.push(startingVertex);
 		while(!stack.isEmpty()) {
-			Object vertex = stack.pop();
+			T vertex = stack.pop();
 			if(!visitedVertices.contains(vertex)) {
 				visitedVertices.add(vertex);
-				Set adjacentVertices = graph.getAdjacentVerticesOf(vertex);
+				Set<T> adjacentVertices = graph.getAdjacentVerticesOf(vertex);
 				if(adjacentVertices != null && !adjacentVertices.isEmpty()) {
-					for(Object adjacentVertex : adjacentVertices) {
+					for(T adjacentVertex : adjacentVertices) {
 						stack.push(adjacentVertex);
 					}
 				}
 			}
 		}
-		return visitedVertices.toArray();
+		@SuppressWarnings("unchecked")
+		T[] out = (T[]) Array.newInstance(startingVertex.getClass(), visitedVertices.size());
+		return visitedVertices.toArray(out);
 	}
 	
-	public static Object[] traverseByIterativeBFS(Graph graph, Object startingVertex) {
-		ArrayList visitedVertices = new ArrayList();
-		Queue queue = new Queue();
+	public static <T> T[] traverseByIterativeBFS(Graph<T> graph, T startingVertex) {
+		ArrayList<T> visitedVertices = new ArrayList<T>();
+		Queue<T> queue = new Queue<T>();
 		queue.enqueue(startingVertex);
 		while(!queue.isEmpty()) {
-			Object vertex = queue.dequeue();
+			T vertex = queue.dequeue();
 			if(!visitedVertices.contains(vertex)) {
 				visitedVertices.add(vertex);
-				Set adjacentVertices = graph.getAdjacentVerticesOf(vertex);
+				Set<T> adjacentVertices = graph.getAdjacentVerticesOf(vertex);
 				if(adjacentVertices !=null && !adjacentVertices.isEmpty()) {
-					for(Object adjacentVertex : adjacentVertices) {
+					for(T adjacentVertex : adjacentVertices) {
 						queue.enqueue(adjacentVertex);
 					}
 				}
 			}
 		}
-		return visitedVertices.toArray();
+		@SuppressWarnings("unchecked")
+		T[] out = (T[]) Array.newInstance(startingVertex.getClass(), visitedVertices.size());
+		return visitedVertices.toArray(out);
 	}
 	
-	public static Object[] traverseByRecursiveBFS(Graph graph, Object startingVertex) {
-		ArrayList visitedVertices = new ArrayList();
+	public static <T> T[] traverseByRecursiveBFS(Graph<T> graph, T startingVertex) {
+		ArrayList<T> visitedVertices = new ArrayList<T>();
 		recursiveBFS(graph, startingVertex, visitedVertices);
-		return visitedVertices.toArray();
+		@SuppressWarnings("unchecked")
+		T[] out = (T[]) Array.newInstance(startingVertex.getClass(), visitedVertices.size());
+		return visitedVertices.toArray(out);
 	}
 	
-	private static void recursiveBFS(Graph graph, Object vertex, List visitedVertices) {
+	private static <T> void recursiveBFS(Graph<T> graph, T vertex, List<T> visitedVertices) {
 		/*if(!visitedVertices.contains(vertex))
 			visitedVertices.add(vertex);
 		Set adjacentVertices = graph.getAdjacentVerticesOf(vertex);
