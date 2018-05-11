@@ -12,276 +12,280 @@ import kar.ds.tree.Tree;
 class BinaryTreeTest {
 
 
-	private void assertLevelOrderContent(Object[] expected, Tree tree) {
-		Object[] actual = tree.traverseLevelOrder();
+	private void assertLevelOrderContent(String[] expected, Tree<String> tree) {
+		String[] actual = tree.traverseLevelOrder();
 		assertArrayEquals(expected, actual);
 	}
 	
-	private void assertPreOrderContent(Object[] expected, Tree tree) {
-		Object[] actual = tree.traversePreOrder();
+	private void assertPreOrderContent(String[] expected, Tree<String> tree) {
+		String[] actual = tree.traversePreOrder();
 		assertArrayEquals(expected, actual);
 	}
 	
-	private void assertInOrderContent(Object[] expected, Tree tree) {
-		Object[] actual = tree.traverseInOrder();
+	private void assertInOrderContent(String[] expected, Tree<String> tree) {
+		String[] actual = tree.traverseInOrder();
 		assertArrayEquals(expected, actual);;
 	}
 	
-	private void assertPostOrderContent(Object[] expected, Tree tree) {
-		Object[] actual = tree.traversePostOrder();
+	private void assertPostOrderContent(String[] expected, Tree<String> tree) {
+		String[] actual = tree.traversePostOrder();
 		assertArrayEquals(expected, actual);
 	}
 	
-	protected Tree createTree(Object[] nodes) {
-		Tree tree = new BinaryTree();
+	protected Tree<String> createTree(String[] nodes) {
+		Tree<String> tree = new BinaryTree<String>();
 		if(nodes != null) {
-			for(Object node : nodes) {
+			for(String node : nodes) {
 				tree.insert(node);
 			}
 		}
 		return tree;
 	}
 	
-	protected Object[] getTreeContent() {
-		return new Object[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"};
+	protected Tree<String> createEmptyTree() {
+		return new BinaryTree<String>();
 	}
 	
-	protected Object[] getPreOrderContent() {
-		return new Object[] {"A","B","D","H","I","E","J","K","C","F","L","M","G","N","O"};
+	protected String[] getTreeContent() {
+		return new String[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"};
 	}
 	
-	protected Object[] getInOrderContent() {
-		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O"};
+	protected String[] getPreOrderContent() {
+		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","M","G","N","O"};
 	}
 	
-	protected Object[] getPostOrderContent() {
-		return new Object[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","C","A"};
+	protected String[] getInOrderContent() {
+		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O"};
 	}
 	
-	protected Object getRootNode() {
+	protected String[] getPostOrderContent() {
+		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","C","A"};
+	}
+	
+	protected String getRootNode() {
 		return "A";
 	}
 	
-	protected Object[] getLevelOrderContentAfterInsertAtRightChildOfRoot() {
-		return new Object[] {"A","B","X","D","E","C","H","I","J","K","F","G","L","M","N","O"};
+	protected String[] getLevelOrderContentAfterInsertAtRightChildOfRoot() {
+		return new String[] {"A","B","X","D","E","C","H","I","J","K","F","G","L","M","N","O"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterInsertAsLeftChildOfRoot() {
-		return new Object[] {"A","X","C","B","F","G","D","E","L","M","N","O","H","I","J","K"};
+	protected String[] getLevelOrderContentAfterInsertAsLeftChildOfRoot() {
+		return new String[] {"A","X","C","B","F","G","D","E","L","M","N","O","H","I","J","K"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterRootNodeDeletion() {
-		return new Object[] {"O","B","C","D","E","F","G","H","I","J","K","L","M","N"};
+	protected String[] getLevelOrderContentAfterRootNodeDeletion() {
+		return new String[] {"O","B","C","D","E","F","G","H","I","J","K","L","M","N"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterDeletingLeftChildOfRoot() {
-		return new Object[] {"A","C","F","G","L","M","N","O"};
+	protected String[] getLevelOrderContentAfterDeletingLeftChildOfRoot() {
+		return new String[] {"A","C","F","G","L","M","N","O"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterDeletingRightChildOfRoot() {
-		return new Object[] {"A","B","D","E","H","I","J","K"};
+	protected String[] getLevelOrderContentAfterDeletingRightChildOfRoot() {
+		return new String[] {"A","B","D","E","H","I","J","K"};
 	}
 	
-	protected Object[] getPreOrderContentAfterInsertAtRightChildOfRoot() {
-		return new Object[] {"A","B","D","H","I","E","J","K","X","C","F","L","M","G","N","O"};
+	protected String[] getPreOrderContentAfterInsertAtRightChildOfRoot() {
+		return new String[] {"A","B","D","H","I","E","J","K","X","C","F","L","M","G","N","O"};
 	}
 	
-	protected Object[] getPreOrderContentAfterInsertAsLeftChildOfRoot() {
-		return new Object[] {"A","X","B","D","H","I","E","J","K","C","F","L","M","G","N","O"};
+	protected String[] getPreOrderContentAfterInsertAsLeftChildOfRoot() {
+		return new String[] {"A","X","B","D","H","I","E","J","K","C","F","L","M","G","N","O"};
 	}
 	
-	protected Object[] getPreOrderContentAfterRootNodeDeletion() {
-		return new Object[] {"O","B","D","H","I","E","J","K","C","F","L","M","G","N"};
+	protected String[] getPreOrderContentAfterRootNodeDeletion() {
+		return new String[] {"O","B","D","H","I","E","J","K","C","F","L","M","G","N"};
 	}
 	
-	protected Object[] getPreOrderContentAfterDeletingLeftChildOfRoot() {
-		return new Object[] {"A","C","F","L","M","G","N","O"};
+	protected String[] getPreOrderContentAfterDeletingLeftChildOfRoot() {
+		return new String[] {"A","C","F","L","M","G","N","O"};
 	}
 	
-	protected Object[] getPreOrderContentAfterDeletingRightChildOfRoot() {
-		return new Object[] {"A","B","D","H","I","E","J","K"};
+	protected String[] getPreOrderContentAfterDeletingRightChildOfRoot() {
+		return new String[] {"A","B","D","H","I","E","J","K"};
 	}
 	
-	protected Object[] getInOrderContentAfterInsertAsRightChildOfRoot() {
-		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O","X"};
+	protected String[] getInOrderContentAfterInsertAsRightChildOfRoot() {
+		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O","X"};
 	}
 	
-	protected Object[] getInOrderContentAfterInsertAsLeftChildOfRoot() {
-		return new Object[] {"H","D","I","B","J","E","K","X","A","L","F","M","C","N","G","O"};
+	protected String[] getInOrderContentAfterInsertAsLeftChildOfRoot() {
+		return new String[] {"H","D","I","B","J","E","K","X","A","L","F","M","C","N","G","O"};
 	}
 	
-	protected Object[] getInOrderContentAfterRootNodeDeletion() {
-		return new Object[] {"H","D","I","B","J","E","K","O","L","F","M","C","N","G"};
+	protected String[] getInOrderContentAfterRootNodeDeletion() {
+		return new String[] {"H","D","I","B","J","E","K","O","L","F","M","C","N","G"};
 	}
 	
-	protected Object[] getInOrderContentAfterDeletingLeftChildOfRoot() {
-		return new Object[] {"A","L","F","M","C","N","G","O"};
+	protected String[] getInOrderContentAfterDeletingLeftChildOfRoot() {
+		return new String[] {"A","L","F","M","C","N","G","O"};
 	}
 	
-	protected Object[] getInOrderContentAfterDeletingRightChildOfRoot() {
-		return new Object[] {"H","D","I","B","J","E","K","A"};
+	protected String[] getInOrderContentAfterDeletingRightChildOfRoot() {
+		return new String[] {"H","D","I","B","J","E","K","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterInsertAsRightChildOfRoot() {
-		return new Object[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","C","X","A"};
+	protected String[] getPostOrderContentAfterInsertAsRightChildOfRoot() {
+		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","C","X","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterInsertAsLeftChildOfRoot() {
-		return new Object[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
+	protected String[] getPostOrderContentAfterInsertAsLeftChildOfRoot() {
+		return new String[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterRootNodeDeletion() {
-		return new Object[] {"H","I","D","J","K","E","B","L","M","F","N","G","C","O"};
+	protected String[] getPostOrderContentAfterRootNodeDeletion() {
+		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","G","C","O"};
 	}
 	
-	protected Object[] getPostOrderContentAfterDeletingLeftChildOfRoot() {
-		return new Object[] {"L","M","F","N","O","G","C","A"};
+	protected String[] getPostOrderContentAfterDeletingLeftChildOfRoot() {
+		return new String[] {"L","M","F","N","O","G","C","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterDeletingRightChildOfRoot() {
-		return new Object[] {"H","I","D","J","K","E","B","A"};
+	protected String[] getPostOrderContentAfterDeletingRightChildOfRoot() {
+		return new String[] {"H","I","D","J","K","E","B","A"};
 	}
 	
-	protected Object getInternalNode() {
+	protected String getInternalNode() {
 		return "C";
 	}
 	
-	protected Object[] getLevelOrderContentAfterInsertAsRightChildOfInternalNode() {
-		return new Object[] {"A","B","C","D","E","F","X","H","I","J","K","L","M","G","N","O"};
+	protected String[] getLevelOrderContentAfterInsertAsRightChildOfInternalNode() {
+		return new String[] {"A","B","C","D","E","F","X","H","I","J","K","L","M","G","N","O"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterInsertAsLeftChildOfInternalNode() {
-		return new Object[] {"A","B","C","D","E","X","G","H","I","J","K","F","N","O","L","M"};
+	protected String[] getLevelOrderContentAfterInsertAsLeftChildOfInternalNode() {
+		return new String[] {"A","B","C","D","E","X","G","H","I","J","K","F","N","O","L","M"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterInternalNodeDeletion() {
-		return new Object[] {"A","B","O","D","E","F","G","H","I","J","K","L","M","N"};
+	protected String[] getLevelOrderContentAfterInternalNodeDeletion() {
+		return new String[] {"A","B","O","D","E","F","G","H","I","J","K","L","M","N"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterDeletingLeftChildOfInternalNode() {
-		return new Object[] {"A","B","C","D","E","G","H","I","J","K","N","O"};
+	protected String[] getLevelOrderContentAfterDeletingLeftChildOfInternalNode() {
+		return new String[] {"A","B","C","D","E","G","H","I","J","K","N","O"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterDeletingRightChildOfInternalNode() {
-		return new Object[] {"A","B","C","D","E","F","H","I","J","K","L","M"};
+	protected String[] getLevelOrderContentAfterDeletingRightChildOfInternalNode() {
+		return new String[] {"A","B","C","D","E","F","H","I","J","K","L","M"};
 	}
 	
-	protected Object[] getPreOrderContentAfterInsertAsRightChildOfInternalNode() {
-		return new Object[] {"A","B","D","H","I","E","J","K","C","F","L","M","X","G","N","O"};
+	protected String[] getPreOrderContentAfterInsertAsRightChildOfInternalNode() {
+		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","M","X","G","N","O"};
 	}
 	
-	protected Object[] getPreOrderContentAfterInsertAsLeftChildOfInternalNode() {
-		return new Object[] {"A","B","D","H","I","E","J","K","C","X","F","L","M","G","N","O"};
+	protected String[] getPreOrderContentAfterInsertAsLeftChildOfInternalNode() {
+		return new String[] {"A","B","D","H","I","E","J","K","C","X","F","L","M","G","N","O"};
 	}
 	
-	protected Object[] getPreOrderContentAfterInternalNodeDeletion() {
-		return new Object[] {"A","B","D","H","I","E","J","K","O","F","L","M","G","N"};
+	protected String[] getPreOrderContentAfterInternalNodeDeletion() {
+		return new String[] {"A","B","D","H","I","E","J","K","O","F","L","M","G","N"};
 	}
 	
-	protected Object[] getPreOrderContentAfterDeletingLeftChildOfInternalNode() {
-		return new Object[] {"A","B","D","H","I","E","J","K","C","G","N","O"};
+	protected String[] getPreOrderContentAfterDeletingLeftChildOfInternalNode() {
+		return new String[] {"A","B","D","H","I","E","J","K","C","G","N","O"};
 	}
 	
-	protected Object[] getPreOrderContentAfterDeletingRightChildOfInternalNode() {
-		return new Object[] {"A","B","D","H","I","E","J","K","C","F","L","M"};
+	protected String[] getPreOrderContentAfterDeletingRightChildOfInternalNode() {
+		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","M"};
 	}
 	
-	protected Object[] getInOrderContentAfterInsertAsRightChildOfInternalNode() {
-		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O","X"};
+	protected String[] getInOrderContentAfterInsertAsRightChildOfInternalNode() {
+		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O","X"};
 	}
 	
-	protected Object[] getInOrderContentAfterInsertAsLeftChildOfInternalNode() {
-		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","X","C","N","G","O"};
+	protected String[] getInOrderContentAfterInsertAsLeftChildOfInternalNode() {
+		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","X","C","N","G","O"};
 	}
 	
-	protected Object[] getInOrderContentAfterInternalNodeDeletion() {
-		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","O","N","G"};
+	protected String[] getInOrderContentAfterInternalNodeDeletion() {
+		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","O","N","G"};
 	}
 	
-	protected Object[] getInOrderContentAfterDeletingLeftChildOfInternalNode() {
-		return new Object[] {"H","D","I","B","J","E","K","A","C","N","G","O"};
+	protected String[] getInOrderContentAfterDeletingLeftChildOfInternalNode() {
+		return new String[] {"H","D","I","B","J","E","K","A","C","N","G","O"};
 	}
 	
-	protected Object[] getInOrderContentAfterDeletingRightChildOfInternalNode() {
-		return new Object[] {"H","D","I","B","J","E","K","A","L","F","M","C"};
+	protected String[] getInOrderContentAfterDeletingRightChildOfInternalNode() {
+		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","C"};
 	}
 	
-	protected Object[] getPostOrderContentAfterInsertAsRightChildOfInternalNode() {
-		return new Object[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","X","C","A"};
+	protected String[] getPostOrderContentAfterInsertAsRightChildOfInternalNode() {
+		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","X","C","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterInsertAsLeftChildOfInternalNode() {
-		return new Object[] {"H","I","D","J","K","E","B","L","M","F","X","N","O","G","C","A"};
+	protected String[] getPostOrderContentAfterInsertAsLeftChildOfInternalNode() {
+		return new String[] {"H","I","D","J","K","E","B","L","M","F","X","N","O","G","C","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterInternalNodeDeletion() {
-		return new Object[] {"H","I","D","J","K","E","B","L","M","F","N","G","O","A"};
+	protected String[] getPostOrderContentAfterInternalNodeDeletion() {
+		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","G","O","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterDeletingLeftChildOfInternalNode() {
-		return new Object[] {"H","I","D","J","K","E","B","N","O","G","C","A"};
+	protected String[] getPostOrderContentAfterDeletingLeftChildOfInternalNode() {
+		return new String[] {"H","I","D","J","K","E","B","N","O","G","C","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterDeletingRightChildOfInternalNode() {
-		return new Object[] {"H","I","D","J","K","E","B","L","M","F","C","A"};
+	protected String[] getPostOrderContentAfterDeletingRightChildOfInternalNode() {
+		return new String[] {"H","I","D","J","K","E","B","L","M","F","C","A"};
 	}
 	
-	protected Object getLeafNode() {
+	protected String getLeafNode() {
 		return "L";
 	}
 	
-	protected Object[] getLevelOrderContentAfterInsertAsRightChildOfLeafNode() {
-		return new Object[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","X"};
+	protected String[] getLevelOrderContentAfterInsertAsRightChildOfLeafNode() {
+		return new String[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","X"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterInsertAsLeftChildOfLeafNode() {
-		return new Object[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","X"};
+	protected String[] getLevelOrderContentAfterInsertAsLeftChildOfLeafNode() {
+		return new String[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","X"};
 	}
 	
-	protected Object[] getLevelOrderContentAfterLeafNodeDeletion() {
-		return new Object[] {"A","B","C","D","E","F","G","H","I","J","K","O","M","N"};
+	protected String[] getLevelOrderContentAfterLeafNodeDeletion() {
+		return new String[] {"A","B","C","D","E","F","G","H","I","J","K","O","M","N"};
 	}
 	
-	protected Object[] getPreOrderContentAfterInsertAsRightChildOfLeafNode() {
-		return new Object[] {"A","B","D","H","I","E","J","K","C","F","L","X","M","G","N","O"};
+	protected String[] getPreOrderContentAfterInsertAsRightChildOfLeafNode() {
+		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","X","M","G","N","O"};
 	}
 	
-	protected Object[] getPreOrderContentAfterInsertAsLeftChildOfLeafNode() {
-		return new Object[] {"A","B","D","H","I","E","J","K","C","F","L","X","M","G","N","O"};
+	protected String[] getPreOrderContentAfterInsertAsLeftChildOfLeafNode() {
+		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","X","M","G","N","O"};
 	}
 	
-	protected Object[] getPreOrderContentAfterLeafNodeDeletion() {
-		return new Object[] {"A","B","D","H","I","E","J","K","C","F","O","M","G","N"};
+	protected String[] getPreOrderContentAfterLeafNodeDeletion() {
+		return new String[] {"A","B","D","H","I","E","J","K","C","F","O","M","G","N"};
 	}
 	
-	protected Object[] getInOrderContentAfterInsertAsRightChildOfLeafNode() {
-		return new Object[] {"H","D","I","B","J","E","K","A","L","X","F","M","C","N","G","O"};
+	protected String[] getInOrderContentAfterInsertAsRightChildOfLeafNode() {
+		return new String[] {"H","D","I","B","J","E","K","A","L","X","F","M","C","N","G","O"};
 	}
 	
-	protected Object[] getInOrderContentAfterInsertAsLeftChildOfLeafNode() {
-		return new Object[] {"H","D","I","B","J","E","K","A","X","L","F","M","C","N","G","O"};
+	protected String[] getInOrderContentAfterInsertAsLeftChildOfLeafNode() {
+		return new String[] {"H","D","I","B","J","E","K","A","X","L","F","M","C","N","G","O"};
 	}
 	
-	protected Object[] getInOrderContentAfterLeafNodeDeletion() {
-		return new Object[] {"H","D","I","B","J","E","K","A","O","F","M","C","N","G"};
+	protected String[] getInOrderContentAfterLeafNodeDeletion() {
+		return new String[] {"H","D","I","B","J","E","K","A","O","F","M","C","N","G"};
 	}
 	
-	protected Object[] getPostOrderContentAfterInsertAsRightChildOfLeafNode() {
-		return new Object[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
+	protected String[] getPostOrderContentAfterInsertAsRightChildOfLeafNode() {
+		return new String[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterInsertAsLeftChildOfLeafNode() {
-		return new Object[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
+	protected String[] getPostOrderContentAfterInsertAsLeftChildOfLeafNode() {
+		return new String[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
 	}
 	
-	protected Object[] getPostOrderContentAfterLeafNodeDeletion() {
-		return new Object[] {"H","I","D","J","K","E","B","O","M","F","N","G","C","A"};
+	protected String[] getPostOrderContentAfterLeafNodeDeletion() {
+		return new String[] {"H","I","D","J","K","E","B","O","M","F","N","G","C","A"};
 	}
 	
 	@Test
 	void testInsert() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		assertLevelOrderContent(expected, tree);
 		assertPreOrderContent(getPreOrderContent(), tree);
 		assertInOrderContent(getInOrderContent(), tree);
@@ -290,7 +294,7 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertInEmptyTreeAsLeftChildOf() {
-		BinaryTree tree = new BinaryTree();
+		BinaryTree<String> tree = (BinaryTree<String>) createEmptyTree();
 		tree.insertAsLeftChildOf("A", "B");
 		assertLevelOrderContent(null, tree);
 		assertPreOrderContent(null, tree);
@@ -300,8 +304,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertAsLeftChildOfRoot() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.insertAsLeftChildOf(getRootNode(), "X");
 		assertLevelOrderContent(getLevelOrderContentAfterInsertAsLeftChildOfRoot(), tree);
 		assertPreOrderContent(getPreOrderContentAfterInsertAsLeftChildOfRoot(), tree);
@@ -311,8 +315,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertAsLeftChildOfInternalNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.insertAsLeftChildOf(getInternalNode(), "X");
 		assertLevelOrderContent(getLevelOrderContentAfterInsertAsLeftChildOfInternalNode(), tree);
 		assertPreOrderContent(getPreOrderContentAfterInsertAsLeftChildOfInternalNode(), tree);
@@ -322,8 +326,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertAsLeftChildOfLeafNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.insertAsLeftChildOf(getLeafNode(), "X");
 		assertLevelOrderContent(getLevelOrderContentAfterInsertAsLeftChildOfLeafNode(), tree);
 		assertPreOrderContent(getPreOrderContentAfterInsertAsLeftChildOfLeafNode(), tree);
@@ -333,8 +337,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertAsLeftChildOfNonExistentNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.insertAsLeftChildOf("Z", "X");
 		assertLevelOrderContent(getTreeContent(), tree);
 		assertPreOrderContent(getPreOrderContent(), tree);
@@ -344,7 +348,7 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertInEmptyTreeAsRightChildOf() {
-		BinaryTree tree = new BinaryTree();
+		BinaryTree<String> tree = (BinaryTree<String>) createEmptyTree();
 		tree.insertAsRightChildOf("A", "B");
 		assertLevelOrderContent(null, tree);
 		assertPreOrderContent(null, tree);
@@ -354,8 +358,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertAsRightChildOfRoot() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.insertAsRightChildOf(getRootNode(), "X");
 		assertLevelOrderContent(getLevelOrderContentAfterInsertAtRightChildOfRoot(), tree);
 		assertPreOrderContent(getPreOrderContentAfterInsertAtRightChildOfRoot(), tree);
@@ -365,8 +369,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertAsRightChildOfInternalNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.insertAsRightChildOf(getInternalNode(), "X");
 		assertLevelOrderContent(getLevelOrderContentAfterInsertAsRightChildOfInternalNode(), tree);
 		assertPreOrderContent(getPreOrderContentAfterInsertAsRightChildOfInternalNode(), tree);
@@ -376,8 +380,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertAsRightChildOfLeafNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.insertAsRightChildOf(getLeafNode(), "X");
 		assertLevelOrderContent(getLevelOrderContentAfterInsertAsRightChildOfLeafNode(), tree);
 		assertPreOrderContent(getPreOrderContentAfterInsertAsRightChildOfLeafNode(), tree);
@@ -387,8 +391,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testInsertAsRightChildOfNonExistentNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.insertAsRightChildOf("Z", "X");
 		assertLevelOrderContent(getTreeContent(), tree);
 		assertPreOrderContent(getPreOrderContent(), tree);
@@ -398,7 +402,7 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteNodeFromEmptyTree() {
-		BinaryTree tree = (BinaryTree) createTree(null);
+		Tree<String> tree = createTree(null);
 		tree.delete("A");
 		assertLevelOrderContent(null, tree);
 		assertPreOrderContent(null, tree);
@@ -408,8 +412,8 @@ class BinaryTreeTest {
 
 	@Test
 	void testDeleteRootNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		tree.delete(getRootNode());
 		assertLevelOrderContent(getLevelOrderContentAfterRootNodeDeletion(), tree);
 		assertPreOrderContent(getPreOrderContentAfterRootNodeDeletion(), tree);
@@ -419,8 +423,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteInternalNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		tree.delete(getInternalNode());
 		assertLevelOrderContent(getLevelOrderContentAfterInternalNodeDeletion(), tree);
 		assertPreOrderContent(getPreOrderContentAfterInternalNodeDeletion(), tree);
@@ -430,8 +434,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteLeafNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		tree.delete(getLeafNode());
 		assertLevelOrderContent(getLevelOrderContentAfterLeafNodeDeletion(), tree);
 		assertPreOrderContent(getPreOrderContentAfterLeafNodeDeletion(), tree);
@@ -441,8 +445,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteNonExistentNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		tree.delete("AA");
 		assertLevelOrderContent(expected, tree);
 		assertPreOrderContent(getPreOrderContent(), tree);
@@ -452,7 +456,7 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteLeftChildOfEmptyTree() {
-		BinaryTree tree = new BinaryTree();
+		BinaryTree<String> tree = (BinaryTree<String>) createEmptyTree();
 		tree.deleteLeftChildOf("A");
 		assertLevelOrderContent(null, tree);
 		assertPreOrderContent(null, tree);
@@ -462,8 +466,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteLeftChildOfRoot() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.deleteLeftChildOf(getRootNode());
 		assertLevelOrderContent(getLevelOrderContentAfterDeletingLeftChildOfRoot(), tree);
 		assertPreOrderContent(getPreOrderContentAfterDeletingLeftChildOfRoot(), tree);
@@ -473,8 +477,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteLeftChildOfInternalNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.deleteLeftChildOf(getInternalNode());
 		assertLevelOrderContent(getLevelOrderContentAfterDeletingLeftChildOfInternalNode(), tree);
 		assertPreOrderContent(getPreOrderContentAfterDeletingLeftChildOfInternalNode(), tree);
@@ -484,8 +488,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteLeftChildOfLeafNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.deleteLeftChildOf(getLeafNode());
 		assertLevelOrderContent(expected, tree);
 		assertPreOrderContent(getPreOrderContent(), tree);
@@ -495,8 +499,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteLeftChildOfNonExistentNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.deleteLeftChildOf("X");
 		assertLevelOrderContent(expected, tree);
 		assertPreOrderContent(getPreOrderContent(), tree);
@@ -506,7 +510,7 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteRightChildOfEmptyTree() {
-		BinaryTree tree = new BinaryTree();
+		BinaryTree<String> tree = (BinaryTree<String>) createEmptyTree();
 		tree.deleteRightChildOf("A");
 		assertLevelOrderContent(null, tree);
 		assertPreOrderContent(null, tree);
@@ -516,8 +520,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteRightChildOfRoot() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.deleteRightChildOf(getRootNode());
 		assertLevelOrderContent(getLevelOrderContentAfterDeletingRightChildOfRoot(), tree);
 		assertPreOrderContent(getPreOrderContentAfterDeletingRightChildOfRoot(), tree);
@@ -527,8 +531,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteRightChildOfInternalNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.deleteRightChildOf(getInternalNode());
 		assertLevelOrderContent(getLevelOrderContentAfterDeletingRightChildOfInternalNode(), tree);
 		assertPreOrderContent(getPreOrderContentAfterDeletingRightChildOfInternalNode(), tree);
@@ -538,8 +542,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteRightChildOfLeafNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.deleteRightChildOf(getLeafNode());
 		assertLevelOrderContent(expected, tree);
 		assertPreOrderContent(getPreOrderContent(), tree);
@@ -549,8 +553,8 @@ class BinaryTreeTest {
 	
 	@Test
 	void testDeleteRightChildOfNonExistentNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		BinaryTree<String> tree = (BinaryTree<String>) createTree(expected);
 		tree.deleteRightChildOf("X");
 		assertLevelOrderContent(expected, tree);
 		assertPreOrderContent(getPreOrderContent(), tree);
@@ -560,41 +564,41 @@ class BinaryTreeTest {
 	
 	@Test
 	void testSearchNodeInEmptyTree() {
-		BinaryTree tree = (BinaryTree) createTree(null);
+		Tree<String> tree = createTree(null);
 		assertFalse(tree.search("A"));
 	}
 
 	@Test
 	void testSearchRootNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		assertTrue(tree.search(getRootNode()));
 	}
 	
 	@Test
 	void testSearchInternalNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		assertTrue(tree.search(getInternalNode()));
 	}
 	
 	@Test
 	void testSearchLeafNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		assertTrue(tree.search(getLeafNode()));
 	}
 	
 	@Test
 	void testSearchNonExistentNode() {
-		Object[] expected = getTreeContent();
-		BinaryTree tree = (BinaryTree) createTree(expected);
+		String[] expected = getTreeContent();
+		Tree<String> tree = createTree(expected);
 		assertFalse(tree.search("X"));
 	}
 
 	@Test
 	void testIsEmpty() {
-		BinaryTree tree = new BinaryTree();
+		Tree<String> tree = createEmptyTree();
 		assertTrue(tree.isEmpty());
 	}
 

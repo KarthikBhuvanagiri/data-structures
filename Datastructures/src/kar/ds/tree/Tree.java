@@ -1,13 +1,13 @@
 package kar.ds.tree;
 
-public interface Tree {
+public interface Tree<T> {
 
-	public void insert(Object data);
-	public void delete(Object data);
-	public boolean search(Object data);
+	public void insert(T data);
+	public void delete(T data);
+	public boolean search(T data);
 	public boolean isEmpty();
-	public Object[] traverseLevelOrder();
-	public Object[] traverseInOrder();
-	public Object[] traversePreOrder();
-	public Object[] traversePostOrder();
+	public T[] traverseLevelOrder();
+	public T[] traverseInOrder();
+	public T[] traversePreOrder();
+	public T[] traversePostOrder();
 }

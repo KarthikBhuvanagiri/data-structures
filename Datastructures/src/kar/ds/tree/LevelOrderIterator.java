@@ -2,11 +2,11 @@ package kar.ds.tree;
 
 import kar.ds.queue.Queue;
 
-public class LevelOrderIterator implements TreeIterator {
+public class LevelOrderIterator<T> implements TreeIterator<T> {
 
-	private Queue queue = new Queue();
+	private Queue<TreeNode<T>> queue = new Queue<TreeNode<T>>();
 	
-	public LevelOrderIterator(TreeNode root) {
+	public LevelOrderIterator(TreeNode<T> root) {
 		if(root != null) {
 			queue.enqueue(root);
 		}
@@ -18,8 +18,8 @@ public class LevelOrderIterator implements TreeIterator {
 	}
 
 	@Override
-	public TreeNode next() {
-		TreeNode node = (TreeNode) queue.dequeue();
+	public TreeNode<T> next() {
+		TreeNode<T> node = queue.dequeue();
 		if(node != null) {
 			if(node.leftNode != null)
 				queue.enqueue(node.leftNode);

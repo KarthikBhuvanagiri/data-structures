@@ -1,12 +1,12 @@
 package kar.ds.tree;
 
-public class TreeNode {
+public class TreeNode<T> {
 
-	TreeNode leftNode;
-	Object data;
-	TreeNode rightNode;
+	TreeNode<T> leftNode;
+	T data;
+	TreeNode<T> rightNode;
 	
-	public TreeNode(TreeNode leftNode, Object data, TreeNode rightNode) {
+	public TreeNode(TreeNode<T> leftNode, T data, TreeNode<T> rightNode) {
 		this.leftNode = leftNode;
 		this.data = data;
 		this.rightNode = rightNode;

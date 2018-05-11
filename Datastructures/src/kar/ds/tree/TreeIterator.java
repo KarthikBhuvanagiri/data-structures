@@ -1,7 +1,7 @@
 package kar.ds.tree;
 
-public interface TreeIterator {
+public interface TreeIterator<T> {
 
 	public boolean hasNext();
-	public TreeNode next();
+	public TreeNode<T> next();
 }

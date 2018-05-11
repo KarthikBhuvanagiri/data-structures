@@ -2,18 +2,18 @@ package kar.ds.tree;
 
 import kar.ds.stack.Stack;
 
-public class PostOrderIterator implements TreeIterator {
+public class PostOrderIterator<T> implements TreeIterator<T> {
 
-	private Stack stack = new Stack();
+	private Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
 	
-	public PostOrderIterator(TreeNode root) {
+	public PostOrderIterator(TreeNode<T> root) {
 		if(root != null) {
 			traverseLeftSubTreeOf(root);
 		}
 	}
 	
-	private void traverseLeftSubTreeOf(TreeNode fromNode) {
-		TreeNode currentNode = fromNode;
+	private void traverseLeftSubTreeOf(TreeNode<T> fromNode) {
+		TreeNode<T> currentNode = fromNode;
 		while(currentNode != null) {
 			if(currentNode.rightNode != null) {
 				stack.push(currentNode.rightNode);
@@ -29,13 +29,13 @@ public class PostOrderIterator implements TreeIterator {
 	}
 
 	@Override
-	public TreeNode next() {
-		TreeNode nextNode = (TreeNode) stack.pop();
+	public TreeNode<T> next() {
+		TreeNode<T> nextNode = stack.pop();
 		while(!stack.isEmpty() && nextNode.rightNode == stack.peek()) {
-			TreeNode currentNode = (TreeNode) stack.pop();
+			TreeNode<T> currentNode = stack.pop();
 			stack.push(nextNode);
 			traverseLeftSubTreeOf(currentNode);
-			nextNode = (TreeNode) stack.pop();
+			nextNode = stack.pop();
 		}
 		return nextNode;
 	}

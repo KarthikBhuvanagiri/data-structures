@@ -2,18 +2,18 @@ package kar.ds.tree;
 
 import kar.ds.stack.Stack;
 
-public class InOrderIterator implements TreeIterator {
+public class InOrderIterator<T> implements TreeIterator<T> {
 
-	Stack stack = new Stack();
+	Stack<TreeNode<T>> stack = new Stack<TreeNode<T>>();
 	
-	public InOrderIterator(TreeNode root) {
+	public InOrderIterator(TreeNode<T> root) {
 		if(root != null) {
 			pushAllLeftNodesFrom(root);
 		}
 	}
 	
-	private void pushAllLeftNodesFrom(TreeNode fromNode) {
-		TreeNode currentNode = fromNode;
+	private void pushAllLeftNodesFrom(TreeNode<T> fromNode) {
+		TreeNode<T> currentNode = fromNode;
 		while(currentNode != null) {
 			stack.push(currentNode);
 			currentNode = currentNode.leftNode;
@@ -26,9 +26,9 @@ public class InOrderIterator implements TreeIterator {
 	}
 
 	@Override
-	public TreeNode next() {
-		TreeNode nextNode = (TreeNode) stack.pop();
-		TreeNode currentNode = nextNode.rightNode;
+	public TreeNode<T> next() {
+		TreeNode<T> nextNode = stack.pop();
+		TreeNode<T> currentNode = nextNode.rightNode;
 		if(currentNode != null) {
 			pushAllLeftNodesFrom(currentNode);
 		}

@@ -1,71 +1,72 @@
 package kar.ds.tree;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class BinaryTree implements Tree {
+public class BinaryTree<T> implements Tree<T> {
 
-	private TreeNode root;
+	private TreeNode<T> root;
 	
 	public BinaryTree() {
 	}
 	
 	@Override
-	public void insert(Object data) {
+	public void insert(T data) {
 		if(root == null) {
-			root = new TreeNode(null, data, null);
+			root = new TreeNode<T>(null, data, null);
 		}else {
-			LevelOrderIterator iterator = new LevelOrderIterator(root);
+			LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 			while(iterator.hasNext()) {
-				TreeNode node = iterator.next();
+				TreeNode<T> node = iterator.next();
 				if(node.leftNode == null) {
-					node.leftNode = new TreeNode(null, data, null);
+					node.leftNode = new TreeNode<T>(null, data, null);
 					break;
 				}else if(node.rightNode == null) {
-					node.rightNode = new TreeNode(null, data, null);
+					node.rightNode = new TreeNode<T>(null, data, null);
 					break;
 				}
 			}
 		}
 	}
 	
-	public void insertAsLeftChildOf(Object parent, Object dataToInsert) {
+	public void insertAsLeftChildOf(T parent, T dataToInsert) {
 		if(isEmpty())
 			return;
 		
-		LevelOrderIterator iterator = new LevelOrderIterator(root);
-		TreeNode currentNode = null;
+		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
+		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
 			if(currentNode.data == parent) {
-				TreeNode newNode = new TreeNode(currentNode.leftNode, dataToInsert, null);
+				TreeNode<T> newNode = new TreeNode<T>(currentNode.leftNode, dataToInsert, null);
 				currentNode.leftNode = newNode;
 				break;
 			}
 		}
 	}
 	
-	public void insertAsRightChildOf(Object parent, Object dataToInsert) {
+	public void insertAsRightChildOf(T parent, T dataToInsert) {
 		if(isEmpty())
 			return;
 		
-		LevelOrderIterator iterator = new LevelOrderIterator(root);
-		TreeNode currentNode = null;
+		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
+		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
 			if(currentNode.data == parent) {
-				TreeNode newNode = new TreeNode(currentNode.rightNode, dataToInsert, null);
+				TreeNode<T> newNode = new TreeNode<T>(currentNode.rightNode, dataToInsert, null);
 				currentNode.rightNode = newNode;
 				break;
 			}
 		}
 	}
 	
-	public void deleteLeftChildOf(Object parent) {
+	public void deleteLeftChildOf(T parent) {
 		if(isEmpty())
 			return;
 		
-		LevelOrderIterator iterator = new LevelOrderIterator(root);
-		TreeNode currentNode = null;
+		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
+		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
 			if(currentNode.data == parent) {
@@ -75,12 +76,12 @@ public class BinaryTree implements Tree {
 		}
 	}
 	
-	public void deleteRightChildOf(Object parent) {
+	public void deleteRightChildOf(T parent) {
 		if(isEmpty())
 			return;
 		
-		LevelOrderIterator iterator = new LevelOrderIterator(root);
-		TreeNode currentNode = null;
+		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
+		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
 			if(currentNode.data == parent) {
@@ -91,15 +92,15 @@ public class BinaryTree implements Tree {
 	}
 
 	@Override
-	public void delete(Object data) {
+	public void delete(T data) {
 		if(isEmpty())
 			return;
 		
-		LevelOrderIterator iterator = new LevelOrderIterator(root);
-		TreeNode nodeToDelete = null; //Node to delete
-		TreeNode deepestRightMostNode = null; //Deepest rightmost node
+		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
+		TreeNode<T> nodeToDelete = null; //Node to delete
+		TreeNode<T> deepestRightMostNode = null; //Deepest rightmost node
 		while(iterator.hasNext()) {
-			TreeNode node = deepestRightMostNode = iterator.next();
+			TreeNode<T> node = deepestRightMostNode = iterator.next();
 			if(node.data == data) {
 				nodeToDelete = node;
 			}
@@ -112,10 +113,10 @@ public class BinaryTree implements Tree {
 		
 	}
 	
-	private void deleteLeafNode(TreeNode leafNode) {
-		LevelOrderIterator iterator = new LevelOrderIterator(root);
+	private void deleteLeafNode(TreeNode<T> leafNode) {
+		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		while(iterator.hasNext()) {
-			TreeNode node = iterator.next();
+			TreeNode<T> node = iterator.next();
 			if(node.leftNode == leafNode) {
 				node.leftNode = null;
 			}else if(node.rightNode == leafNode) {
@@ -125,14 +126,14 @@ public class BinaryTree implements Tree {
 	}
 
 	@Override
-	public boolean search(Object data) {
+	public boolean search(T data) {
 		if(isEmpty())
 			return false;
 		
 		boolean isFound = false;
-		LevelOrderIterator iterator = new LevelOrderIterator(root);
+		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		while(iterator.hasNext()) {
-			TreeNode node = iterator.next();
+			TreeNode<T> node = iterator.next();
 			if(node.data == data) {
 				isFound = true;
 				break;
@@ -148,59 +149,67 @@ public class BinaryTree implements Tree {
 	}
 	
 	@Override
-	public Object[] traverseLevelOrder() {
+	public T[] traverseLevelOrder() {
 		if(isEmpty())
 			return null;
 		
-		ArrayList visitedNodes = new ArrayList();
-		LevelOrderIterator iterator = new LevelOrderIterator(root);
+		ArrayList<T> visitedNodes = new ArrayList<T>();
+		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		while(iterator.hasNext()) {
-			TreeNode node = iterator.next();
+			TreeNode<T> node = iterator.next();
 			visitedNodes.add(node.data);
 		}
-		return visitedNodes.toArray();
+		@SuppressWarnings("unchecked")
+		T[] out = (T[]) Array.newInstance(root.data.getClass(), visitedNodes.size());
+		return visitedNodes.toArray(out);
 	}
 
 	@Override
-	public Object[] traverseInOrder() {
+	public T[] traverseInOrder() {
 		if(isEmpty())
 			return null;
 		
-		ArrayList visitedNodes = new ArrayList();
-		InOrderIterator iterator = new InOrderIterator(root);
+		ArrayList<T> visitedNodes = new ArrayList<T>();
+		InOrderIterator<T> iterator = new InOrderIterator<T>(root);
 		while(iterator.hasNext()) {
-			TreeNode node = iterator.next();
+			TreeNode<T> node = iterator.next();
 			visitedNodes.add(node.data);
 		}
-		return visitedNodes.toArray();
+		@SuppressWarnings("unchecked")
+		T[] out = (T[]) Array.newInstance(root.data.getClass(), visitedNodes.size());
+		return visitedNodes.toArray(out);
 	}
 
 	@Override
-	public Object[] traversePreOrder() {
+	public T[] traversePreOrder() {
 		if(isEmpty())
 			return null;
 		
-		ArrayList visitedNodes = new ArrayList();
-		PreOrderIterator iterator = new PreOrderIterator(root);
+		ArrayList<T> visitedNodes = new ArrayList<T>();
+		PreOrderIterator<T> iterator = new PreOrderIterator<T>(root);
 		while(iterator.hasNext()) {
-			TreeNode node = iterator.next();
+			TreeNode<T> node = iterator.next();
 			visitedNodes.add(node.data);
 		}
-		return visitedNodes.toArray();
+		@SuppressWarnings("unchecked")
+		T[] out = (T[]) Array.newInstance(root.data.getClass(), visitedNodes.size());
+		return visitedNodes.toArray(out);
 	}
 
 	@Override
-	public Object[] traversePostOrder() {
+	public T[] traversePostOrder() {
 		if(isEmpty())
 			return null;
 		
-		ArrayList visitedNodes = new ArrayList();
-		PostOrderIterator iterator = new PostOrderIterator(root);
+		ArrayList<T> visitedNodes = new ArrayList<T>();
+		PostOrderIterator<T> iterator = new PostOrderIterator<T>(root);
 		while(iterator.hasNext()) {
-			TreeNode node = iterator.next();
+			TreeNode<T> node = iterator.next();
 			visitedNodes.add(node.data);
 		}
-		return visitedNodes.toArray();
+		@SuppressWarnings("unchecked")
+		T[] out = (T[]) Array.newInstance(root.data.getClass(), visitedNodes.size());
+		return visitedNodes.toArray(out);
 	}
 
 }
