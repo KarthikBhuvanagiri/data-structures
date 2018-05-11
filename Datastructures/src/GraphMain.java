@@ -16,7 +16,7 @@ import kar.graph.utils.GraphUtils;
 
 public class GraphMain {
 
-	private static Graph graph = new AdjacencyList();
+	private static Graph<String> graph = new AdjacencyList<String>();
 	
 	public static void main(String[] args) {
 		Options options = getOptions();
