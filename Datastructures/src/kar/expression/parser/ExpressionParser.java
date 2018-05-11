@@ -83,7 +83,7 @@ public class ExpressionParser {
 		String postFixExpression = "";
 		String expression = infixExpression.getExpression();
 		int noOfChars = expression.length();
-		Stack stack = new Stack();
+		Stack<Character> stack = new Stack<Character>();
 		for(int i=0; i<noOfChars; i++) {
 			char c = expression.charAt(i);
 			if(isOperand(c)) {
@@ -97,7 +97,7 @@ public class ExpressionParser {
 						stack.push(c);
 					}else {
 						while(!stack.isEmpty() && checkOperatorPrecendence(c, (Character) stack.peek()) < 1) {
-							char operatorInStack = (char) stack.pop();
+							char operatorInStack = stack.pop();
 //							if(operatorInStack == '(')
 //								break;
 							postFixExpression = postFixExpression + operatorInStack + " ";
@@ -109,7 +109,7 @@ public class ExpressionParser {
 				stack.push(c);
 			}else if(c == ')') {
 				while(!stack.isEmpty()) {
-					char operatorInStack = (char) stack.pop();
+					char operatorInStack = stack.pop();
 					if(operatorInStack == '(') {
 						break;
 					}else {
@@ -120,7 +120,7 @@ public class ExpressionParser {
 		}
 		
 		while(!stack.isEmpty()) {
-			char itemInStack = (char) stack.pop();
+			char itemInStack = stack.pop();
 			postFixExpression = postFixExpression + itemInStack + " ";
 		}
 		

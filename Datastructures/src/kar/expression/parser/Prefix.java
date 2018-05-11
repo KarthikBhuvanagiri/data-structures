@@ -13,7 +13,7 @@ public class Prefix implements Expression {
 	@Override
 	public double evaluate() {
 		String expressionInReverse = new StringBuilder(expression).reverse().toString();
-		Stack stack = new Stack();
+		Stack<Double> stack = new Stack<Double>();
 		String[] expressionTokens = expressionInReverse.split(" ");
 		for(int i=0; i<expressionTokens.length; i++) {
 			String token = expressionTokens[i];
@@ -21,13 +21,13 @@ public class Prefix implements Expression {
 			if(ExpressionParser.isOperand(tokenChar)) {
 				stack.push(Double.parseDouble(token));
 			}else if (ExpressionParser.isOperator(tokenChar)) {
-				double op1 = (double) stack.pop();
-				double op2 = (double) stack.pop();
+				double op1 = stack.pop();
+				double op2 = stack.pop();
 				stack.push(calculate(op1, op2, tokenChar));
 			}
 		}
 		
-		return (double) stack.pop();
+		return stack.pop();
 	}
 	
 	private double calculate(double op1, double op2, char operator) {
