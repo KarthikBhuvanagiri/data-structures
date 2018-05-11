@@ -1,11 +1,11 @@
 package kar.ds.linkedlist;
 
-public class Node {
-	Node previousNode;
-	Object data;
-	Node nextNode;
+public class Node<T> {
+	Node<T> previousNode;
+	T data;
+	Node<T> nextNode;
 	
-	public Node(Node leftNode, Object data, Node rightNode) {
+	public Node(Node<T> leftNode, T data, Node<T> rightNode) {
 		this.previousNode = leftNode;
 		this.data = data;
 		this.nextNode = rightNode;

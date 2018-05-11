@@ -12,11 +12,11 @@ import kar.ds.linkedlist.SingleLinkedList;
 
 class SingleLinkedListTest {
 
-	void assertSizeAndContent(int expectedSize, Object[] expectedContent, SingleLinkedList list) {
+	void assertSizeAndContent(int expectedSize, Integer[] expectedContent, SingleLinkedList<Integer> list) {
 		int size = list.getSize();
 		assertEquals(expectedSize, size);
 
-		Object[] actualContent = list.traverse();
+		Integer[] actualContent = list.traverse();
 		if(expectedContent != null)
 			assertArrayEquals(expectedContent, actualContent);
 		else
@@ -25,13 +25,13 @@ class SingleLinkedListTest {
 	
 	@Test
 	void testIsEmpty() {
-		SingleLinkedList list = new SingleLinkedList();
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
 		assertSizeAndContent(0, null, list);
 	}
 
 	@Test
 	void testInsert() {
-		SingleLinkedList list = new SingleLinkedList();
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
 		list.insert(0);
 		list.insert(1);
 		list.insert(2);
@@ -41,17 +41,17 @@ class SingleLinkedListTest {
 
 	@Test
 	void testInsertAtOnEmptyList() {
-		SingleLinkedList list = new SingleLinkedList();
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
 		
 		boolean isSuccess = list.insertAt(0, 0);
 		assertTrue(isSuccess);
-		assertSizeAndContent(1, new Object[] {0}, list);
+		assertSizeAndContent(1, new Integer[] {0}, list);
 	}
 	
 	@Test
 	void testInsertAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		boolean isSuccess = list.insertAt(-1, -1);
 		assertFalse(isSuccess);
 		
@@ -60,7 +60,7 @@ class SingleLinkedListTest {
 	
 	@Test
 	void testInsertAtIndexZero() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {1,2,3});
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {1,2,3});
 		boolean isSuccess = list.insertAt(0, 0);
 		assertTrue(isSuccess);
 		
@@ -70,7 +70,7 @@ class SingleLinkedListTest {
 	
 	@Test
 	void testInsertAtIndexTwo() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,3,4});
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,3,4});
 		boolean isSuccess = list.insertAt(2, 2);
 		assertTrue(isSuccess);
 		
@@ -80,7 +80,7 @@ class SingleLinkedListTest {
 	
 	@Test
 	void testInsertAtLastIndex() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,4});
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,4});
 		boolean isSuccess = list.insertAt(list.getSize()-1, 3);
 		assertTrue(isSuccess);
 		
@@ -91,7 +91,7 @@ class SingleLinkedListTest {
 	@Test
 	void testInsertAtIndexEqualsSize() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		boolean isSuccess = list.insertAt(list.getSize(), 4);
 		assertFalse(isSuccess);
 		
@@ -101,7 +101,7 @@ class SingleLinkedListTest {
 	@Test
 	void testInsertAtIndexGreaterThanSize() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		boolean isSuccess = list.insertAt(list.getSize()+1, 4);
 		assertFalse(isSuccess);
 		
@@ -110,7 +110,7 @@ class SingleLinkedListTest {
 
 	@Test
 	void testUpdateEmptyList() {
-		SingleLinkedList list = new SingleLinkedList();
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
 		boolean isSuccess = list.update(1, 0);
 		
 		assertFalse(isSuccess);
@@ -120,7 +120,7 @@ class SingleLinkedListTest {
 	@Test
 	void testUpdateAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		boolean isSuccess = list.update(-1, -1);
 		
 		assertFalse(isSuccess);
@@ -129,38 +129,38 @@ class SingleLinkedListTest {
 	
 	@Test
 	void testUpdateAtIndexZero() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.update("0x", 0);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		boolean isSuccess = list.update(-1, 0);
 		
 		assertTrue(isSuccess);
-		Object[] expectedContent = new Object[]{"0x",1,2,3};
+		Integer[] expectedContent = new Integer[]{-1,1,2,3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testUpdateAtIndexTwo() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.update("2x", 2);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		boolean isSuccess = list.update(-2, 2);
 		
 		assertTrue(isSuccess);
-		Object[] expectedContent = new Object[]{0,1,"2x",3};
+		Integer[] expectedContent = new Integer[]{0,1,-2,3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testUpdateAtLastIndex() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.update("3x", list.getSize()-1);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		boolean isSuccess = list.update(-3, list.getSize()-1);
 		
 		assertTrue(isSuccess);
-		Object[] expectedContent = new Object[]{0,1,2,"3x"};
+		Integer[] expectedContent = new Integer[]{0,1,2,-3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testUpdateAtIndexEqualsSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		boolean isSuccess = list.update(4, list.getSize());
 		
 		assertFalse(isSuccess);
@@ -170,7 +170,7 @@ class SingleLinkedListTest {
 	@Test
 	void testUpdateAtIndexGreaterThanSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		boolean isSuccess = list.update(100, list.getSize()+1);
 		
 		assertFalse(isSuccess);
@@ -179,7 +179,7 @@ class SingleLinkedListTest {
 
 	@Test
 	void testDeleteExistingData() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,3});
 		boolean isSuccess = list.delete(2);
 		
 		assertTrue(isSuccess);
@@ -189,7 +189,7 @@ class SingleLinkedListTest {
 	
 	@Test
 	void testDeleteNonExistingData() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,3});
 		boolean isSuccess = list.delete(5);
 		
 		assertFalse(isSuccess);
@@ -199,8 +199,8 @@ class SingleLinkedListTest {
 
 	@Test
 	void testDeleteAtOnEmptyList() {
-		SingleLinkedList list = new SingleLinkedList();
-		Object data = list.deleteAt(0);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
+		Integer data = list.deleteAt(0);
 		
 		assertNull(data);
 		assertSizeAndContent(0, null, list);
@@ -209,8 +209,8 @@ class SingleLinkedListTest {
 	@Test
 	void testDeleteAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
-		Object data = list.deleteAt(-1);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
+		Integer data = list.deleteAt(-1);
 		
 		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
@@ -218,39 +218,39 @@ class SingleLinkedListTest {
 	
 	@Test
 	void testDeleteAtIndexZero() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		Object data = list.deleteAt(0);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		Integer data = list.deleteAt(0);
 		
-		assertEquals(0, data);
-		Object[] expectedContent = new Object[]{1,2,3};
+		assertEquals(Integer.valueOf(0), data);
+		Integer[] expectedContent = new Integer[]{1,2,3};
 		assertSizeAndContent(expectedContent.length, expectedContent , list);
 	}
 	
 	@Test
 	void testDeleteAtIndexTwo() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		Object data = list.deleteAt(2);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		Integer data = list.deleteAt(2);
 		
-		assertEquals(2, data);
-		Object[] expectedContent = new Object[]{0,1,3};
+		assertEquals(Integer.valueOf(2), data);
+		Integer[] expectedContent = new Integer[]{0,1,3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testDeleteAtLastIndex() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0,1,2,3});
-		Object data = list.deleteAt(list.getSize()-1);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		Integer data = list.deleteAt(list.getSize()-1);
 		
-		assertEquals(3, data);
-		Object[] expectedContent = new Object[]{0,1,2};
+		assertEquals(Integer.valueOf(3), data);
+		Integer[] expectedContent = new Integer[]{0,1,2};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testDeleteAtIndexEqualsSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
-		Object data = list.deleteAt(list.getSize());
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
+		Integer data = list.deleteAt(list.getSize());
 		
 		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
@@ -259,8 +259,8 @@ class SingleLinkedListTest {
 	@Test
 	void testDeleteAtIndexGreaterThanSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
-		Object data = list.deleteAt(list.getSize()+1);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
+		Integer data = list.deleteAt(list.getSize()+1);
 		
 		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
@@ -268,16 +268,16 @@ class SingleLinkedListTest {
 	
 	@Test
 	void testDeleteAtOnListWithOneItem() {
-		SingleLinkedList list = new SingleLinkedList(new Integer[] {0});
-		Object data = list.deleteAt(0);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(new Integer[] {0});
+		Integer data = list.deleteAt(0);
 		
-		assertEquals(0, data);
+		assertEquals(Integer.valueOf(0), data);
 		assertSizeAndContent(0, null, list);
 	}
 	
 	@Test
 	void testGetDataAtOnEmptyList() {
-		SingleLinkedList list = new SingleLinkedList();
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>();
 		
 		assertNull(list.getDataAt(0));
 		assertSizeAndContent(0, null, list);
@@ -286,7 +286,7 @@ class SingleLinkedListTest {
 	@Test
 	void testGetDataAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		
 		assertEquals(null, list.getDataAt(-1));
 		assertSizeAndContent(content.length, content, list);
@@ -295,34 +295,34 @@ class SingleLinkedListTest {
 	@Test
 	void testGetDataAtIndexZero() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		
-		assertEquals(0, list.getDataAt(0));
+		assertEquals(Integer.valueOf(0), list.getDataAt(0));
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testGetDataAtIndexTwo() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		
-		assertEquals(2, list.getDataAt(2));
+		assertEquals(Integer.valueOf(2), list.getDataAt(2));
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testGetDataAtLastIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		
-		assertEquals(3, list.getDataAt(list.getSize() - 1));
+		assertEquals(Integer.valueOf(3), list.getDataAt(list.getSize() - 1));
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testGetDataAtIndexEqualsSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		
 		assertEquals(null, list.getDataAt(list.getSize()));
 		assertSizeAndContent(content.length, content, list);
@@ -331,7 +331,7 @@ class SingleLinkedListTest {
 	@Test
 	void testGetDataAtIndexGreaterThanSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		SingleLinkedList list = new SingleLinkedList(content);
+		SingleLinkedList<Integer> list = new SingleLinkedList<Integer>(content);
 		
 		assertEquals(null, list.getDataAt(list.getSize() + 1));
 		assertSizeAndContent(content.length, content, list);

@@ -16,18 +16,18 @@ import kar.ds.linkedlist.DoubleLinkedList;
 
 class DoubleLinkedListTest {
 
-	void assertSizeAndContent(int expectedSize, Object[] expectedContent, DoubleLinkedList list) {
+	void assertSizeAndContent(int expectedSize, Integer[] expectedContent, DoubleLinkedList<Integer> list) {
 		int size = list.getSize();
 		assertEquals(expectedSize, size);
 		
 		if(expectedContent != null) {
-			Object[] actualContent = list.traverseForward();
+			Integer[] actualContent = list.traverseForward();
 			assertArrayEquals(expectedContent, actualContent);
 			
-			List expectedContentList = Arrays.asList(expectedContent);
+			List<Integer> expectedContentList = Arrays.asList(expectedContent);
 			Collections.reverse(expectedContentList);
-			Object[] expectedContentReverse = expectedContentList.toArray();
-			Object[] actualContentReverse = list.traverseReverse();
+			Integer[] expectedContentReverse = (Integer[]) expectedContentList.toArray();
+			Integer[] actualContentReverse = list.traverseReverse();
 			assertArrayEquals(expectedContentReverse, actualContentReverse);
 		}else {
 			assertNull(list.traverseForward());
@@ -37,13 +37,13 @@ class DoubleLinkedListTest {
 	
 	@Test
 	void testIsEmpty() {
-		DoubleLinkedList list = new DoubleLinkedList();
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>();
 		assertSizeAndContent(0, null, list);
 	}
 
 	@Test
 	void testInsert() {
-		DoubleLinkedList list = new DoubleLinkedList();
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>();
 		list.insert(0);
 		list.insert(1);
 		list.insert(2);
@@ -53,17 +53,17 @@ class DoubleLinkedListTest {
 
 	@Test
 	void testInsertAtOnEmptyList() {
-		DoubleLinkedList list = new DoubleLinkedList();
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>();
 		
 		boolean isSuccess = list.insertAt(0, 0);
 		assertTrue(isSuccess);
-		assertSizeAndContent(1, new Object[] {0}, list);
+		assertSizeAndContent(1, new Integer[] {0}, list);
 	}
 	
 	@Test
 	void testInsertAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		boolean isSuccess = list.insertAt(-1, -1);
 		assertFalse(isSuccess);
 		
@@ -72,7 +72,7 @@ class DoubleLinkedListTest {
 	
 	@Test
 	void testInsertAtIndexZero() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {1,2,3});
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {1,2,3});
 		boolean isSuccess = list.insertAt(0, 0);
 		assertTrue(isSuccess);
 		
@@ -82,7 +82,7 @@ class DoubleLinkedListTest {
 	
 	@Test
 	void testInsertAtIndexTwo() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,3,4});
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,3,4});
 		boolean isSuccess = list.insertAt(2, 2);
 		assertTrue(isSuccess);
 		
@@ -92,7 +92,7 @@ class DoubleLinkedListTest {
 	
 	@Test
 	void testInsertAtLastIndex() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,4});
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,4});
 		boolean isSuccess = list.insertAt(list.getSize()-1, 3);
 		assertTrue(isSuccess);
 		
@@ -103,7 +103,7 @@ class DoubleLinkedListTest {
 	@Test
 	void testInsertAtIndexEqualsSize() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		boolean isSuccess = list.insertAt(list.getSize(), 4);
 		assertFalse(isSuccess);
 		
@@ -113,7 +113,7 @@ class DoubleLinkedListTest {
 	@Test
 	void testInsertAtIndexGreaterThanSize() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		boolean isSuccess = list.insertAt(list.getSize()+1, 4);
 		assertFalse(isSuccess);
 		
@@ -122,7 +122,7 @@ class DoubleLinkedListTest {
 
 	@Test
 	void testUpdateAtOnEmptyList() {
-		DoubleLinkedList list = new DoubleLinkedList();
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>();
 		boolean isSuccess = list.update(3, 0);
 		
 		assertFalse(isSuccess);
@@ -132,7 +132,7 @@ class DoubleLinkedListTest {
 	@Test
 	void testUpdateAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		boolean isSuccess = list.update(-1, -1);
 		
 		assertFalse(isSuccess);
@@ -141,38 +141,38 @@ class DoubleLinkedListTest {
 	
 	@Test
 	void testUpdateAtIndexZero() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.update("0x", 0);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		boolean isSuccess = list.update(-1, 0);
 		
 		assertTrue(isSuccess);
-		Object[] expectedContent = new Object[]{"0x",1,2,3};
+		Integer[] expectedContent = new Integer[]{-1,1,2,3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testUpdateAtIndexTwo() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.update("2x", 2);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		boolean isSuccess = list.update(-2, 2);
 		
 		assertTrue(isSuccess);
-		Object[] expectedContent = new Object[]{0,1,"2x",3};
+		Integer[] expectedContent = new Integer[]{0,1,-2,3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testUpdateAtLastIndex() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		boolean isSuccess = list.update("3x", list.getSize()-1);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		boolean isSuccess = list.update(-3, list.getSize()-1);
 		
 		assertTrue(isSuccess);
-		Object[] expectedContent = new Object[]{0,1,2,"3x"};
+		Integer[] expectedContent = new Integer[]{0,1,2,-3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testUpdateAtIndexEqualsSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		boolean isSuccess = list.update(4, list.getSize());
 		
 		assertFalse(isSuccess);
@@ -182,7 +182,7 @@ class DoubleLinkedListTest {
 	@Test
 	void testUpdateAtIndexGreaterThanSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		boolean isSuccess = list.update(100, list.getSize()+1);
 		
 		assertFalse(isSuccess);
@@ -191,7 +191,7 @@ class DoubleLinkedListTest {
 
 	@Test
 	void testDeleteExistingData() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,3});
 		boolean isSuccess = list.delete(2);
 		
 		assertTrue(isSuccess);
@@ -201,7 +201,7 @@ class DoubleLinkedListTest {
 	
 	@Test
 	void testDeleteNonExistingData() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,3});
 		boolean isSuccess = list.delete(5);
 		
 		assertFalse(isSuccess);
@@ -211,8 +211,8 @@ class DoubleLinkedListTest {
 
 	@Test
 	void testDeleteAtOnEmptyList() {
-		DoubleLinkedList list = new DoubleLinkedList();
-		Object data = list.deleteAt(0);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>();
+		Integer data = list.deleteAt(0);
 		
 		assertNull(data);
 		assertSizeAndContent(0, null, list);
@@ -221,8 +221,8 @@ class DoubleLinkedListTest {
 	@Test
 	void testDeleteAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
-		Object data = list.deleteAt(-1);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
+		Integer data = list.deleteAt(-1);
 		
 		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
@@ -230,39 +230,39 @@ class DoubleLinkedListTest {
 	
 	@Test
 	void testDeleteAtIndexZero() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		Object data = list.deleteAt(0);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		Integer data = list.deleteAt(0);
 		
-		assertEquals(0, data);
-		Object[] expectedContent = new Object[]{1,2,3};
+		assertEquals(Integer.valueOf(0), data);
+		Integer[] expectedContent = new Integer[]{1,2,3};
 		assertSizeAndContent(expectedContent.length, expectedContent , list);
 	}
 	
 	@Test
 	void testDeleteAtIndexTwo() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		Object data = list.deleteAt(2);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		Integer data = list.deleteAt(2);
 		
-		assertEquals(2, data);
-		Object[] expectedContent = new Object[]{0,1,3};
+		assertEquals(Integer.valueOf(2), data);
+		Integer[] expectedContent = new Integer[]{0,1,3};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testDeleteAtLastIndex() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0,1,2,3});
-		Object data = list.deleteAt(list.getSize()-1);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0,1,2,3});
+		Integer data = list.deleteAt(list.getSize()-1);
 		
-		assertEquals(3, data);
-		Object[] expectedContent = new Object[]{0,1,2};
+		assertEquals(Integer.valueOf(3), data);
+		Integer[] expectedContent = new Integer[]{0,1,2};
 		assertSizeAndContent(expectedContent.length, expectedContent, list);
 	}
 	
 	@Test
 	void testDeleteAtIndexEqualsSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
-		Object data = list.deleteAt(list.getSize());
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
+		Integer data = list.deleteAt(list.getSize());
 		
 		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
@@ -271,8 +271,8 @@ class DoubleLinkedListTest {
 	@Test
 	void testDeleteAtIndexGreaterThanSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
-		Object data = list.deleteAt(list.getSize()+1);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
+		Integer data = list.deleteAt(list.getSize()+1);
 		
 		assertNull(data);
 		assertSizeAndContent(content.length, content, list);
@@ -280,16 +280,16 @@ class DoubleLinkedListTest {
 	
 	@Test
 	void testDeleteAtOnListWithOneItem() {
-		DoubleLinkedList list = new DoubleLinkedList(new Integer[] {0});
-		Object data = list.deleteAt(0);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(new Integer[] {0});
+		Integer data = list.deleteAt(0);
 		
-		assertEquals(0, data);
+		assertEquals(Integer.valueOf(0), data);
 		assertSizeAndContent(0, null, list);
 	}
 	
 	@Test
 	void testGetDataAtOnEmptyList() {
-		DoubleLinkedList list = new DoubleLinkedList();
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>();
 		
 		assertNull(list.getDataAt(0));
 		assertSizeAndContent(0, null, list);
@@ -298,7 +298,7 @@ class DoubleLinkedListTest {
 	@Test
 	void testGetDataAtNegativeIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		
 		assertEquals(null, list.getDataAt(-1));
 		assertSizeAndContent(content.length, content, list);
@@ -307,34 +307,34 @@ class DoubleLinkedListTest {
 	@Test
 	void testGetDataAtIndexZero() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		
-		assertEquals(0, list.getDataAt(0));
+		assertEquals(Integer.valueOf(0), list.getDataAt(0));
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testGetDataAtIndexTwo() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		
-		assertEquals(2, list.getDataAt(2));
+		assertEquals(Integer.valueOf(2), list.getDataAt(2));
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testGetDataAtLastIndex() {
 		Integer[] content = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		
-		assertEquals(3, list.getDataAt(list.getSize() - 1));
+		assertEquals(Integer.valueOf(3), list.getDataAt(list.getSize() - 1));
 		assertSizeAndContent(content.length, content, list);
 	}
 	
 	@Test
 	void testGetDataAtIndexEqualsSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		
 		assertEquals(null, list.getDataAt(list.getSize()));
 		assertSizeAndContent(content.length, content, list);
@@ -343,7 +343,7 @@ class DoubleLinkedListTest {
 	@Test
 	void testGetDataAtIndexGreaterThanSize() {
 		Integer content[] = new Integer[] {0,1,2,3};
-		DoubleLinkedList list = new DoubleLinkedList(content);
+		DoubleLinkedList<Integer> list = new DoubleLinkedList<Integer>(content);
 		
 		assertEquals(null, list.getDataAt(list.getSize() + 1));
 		assertSizeAndContent(content.length, content, list);

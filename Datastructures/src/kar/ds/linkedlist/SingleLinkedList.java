@@ -1,23 +1,24 @@
 package kar.ds.linkedlist;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
-public class SingleLinkedList {
+public class SingleLinkedList<T> {
 
-	private Node head;
-	private Node tail;
+	private Node<T> head;
+	private Node<T> tail;
 	private int noOfNodes = 0;
 
 	public SingleLinkedList(){
 	}
 	
-	public SingleLinkedList(List dataList) {
-		for(Object data : dataList)
+	public SingleLinkedList(List<T> dataList) {
+		for(T data : dataList)
 			insert(data);
 	}
 	
-	public SingleLinkedList(Object[] dataArray) {
-		for(Object data : dataArray)
+	public SingleLinkedList(T[] dataArray) {
+		for(T data : dataArray)
 			insert(data);
 	}
 	
@@ -25,7 +26,7 @@ public class SingleLinkedList {
 		return noOfNodes == 0 && head == null && tail == null ? true : false;
 	}
 	
-	private Node getNodeAt(int index) {
+	private Node<T> getNodeAt(int index) {
 		if(index < 0 || isEmpty() || index >= noOfNodes)
 			return null;
 		
@@ -36,7 +37,7 @@ public class SingleLinkedList {
 			return tail;
 		
 		int currentIndex = 0;
-		Node currentNode = head;
+		Node<T> currentNode = head;
 		while(currentIndex != index) {
 			currentIndex++;
 			currentNode = currentNode.nextNode;
@@ -44,31 +45,31 @@ public class SingleLinkedList {
 		return currentNode;
 	}
 	
-	public void insert(Object data) {
+	public void insert(T data) {
 		if(isEmpty()) {
-			head = tail = new Node(null, data, null);
+			head = tail = new Node<T>(null, data, null);
 		}else {
-			Node lastNode = tail;
-			Node newNode = new Node(null, data, null);
+			Node<T> lastNode = tail;
+			Node<T> newNode = new Node<T>(null, data, null);
 			tail = lastNode.nextNode = newNode;
 		}
 		noOfNodes++;
 	}
 	
-	public boolean insertAt(int index, Object data) {
+	public boolean insertAt(int index, T data) {
 		boolean isSuccess = false;
 		if(isEmpty()) {
-			head = tail = new Node(null, data, null);
+			head = tail = new Node<T>(null, data, null);
 			isSuccess = true;
 		}else if(index == 0) {
-			Node newNode = new Node(null, data, head);
+			Node<T> newNode = new Node<T>(null, data, head);
 			head = newNode;
 			isSuccess = true;
 		}else {
-			Node nodeAtGivenIndex = getNodeAt(index);
+			Node<T> nodeAtGivenIndex = getNodeAt(index);
 			if(nodeAtGivenIndex != null) {
-				Node nodeAtPreviousIndex = getNodeAt(index - 1);
-				Node newNode = new Node(null, data, nodeAtGivenIndex);
+				Node<T> nodeAtPreviousIndex = getNodeAt(index - 1);
+				Node<T> newNode = new Node<T>(null, data, nodeAtGivenIndex);
 				nodeAtPreviousIndex.nextNode = newNode;
 				isSuccess = true;
 			}
@@ -80,12 +81,12 @@ public class SingleLinkedList {
 		return isSuccess;
 	}
 	
-	public boolean update(Object data, int index) {
+	public boolean update(T data, int index) {
 		if(isEmpty())
 			return false;
 		
 		boolean isSuccess = false;
-		Node nodeAtGivenIndex = getNodeAt(index);
+		Node<T> nodeAtGivenIndex = getNodeAt(index);
 		if(nodeAtGivenIndex != null) {
 			nodeAtGivenIndex.data = data;
 			isSuccess = true;
@@ -93,10 +94,10 @@ public class SingleLinkedList {
 		return isSuccess;
 	}
 	
-	public boolean delete(Object data) {
+	public boolean delete(T data) {
 		boolean isSuccess = false;
-		Node previousNode = null;
-		Node currentNode = head;
+		Node<T> previousNode = null;
+		Node<T> currentNode = head;
 		while(currentNode != null) {
 			if(data == currentNode.data) {
 				previousNode.nextNode = currentNode.nextNode;
@@ -111,18 +112,18 @@ public class SingleLinkedList {
 		return isSuccess;
 	}
 	
-	public Object deleteAt(int index) {
+	public T deleteAt(int index) {
 		if(isEmpty())
 			return null;
 		
-		Node nodeToDelete = getNodeAt(index);
+		Node<T> nodeToDelete = getNodeAt(index);
 		if(nodeToDelete != null) {
 			if(nodeToDelete == head && nodeToDelete == tail) {
 				head = tail = null;
 			} else if(nodeToDelete == head) {
 				head = head.nextNode;
 			} else {
-				Node previousNode = getNodeAt(index - 1);
+				Node<T> previousNode = getNodeAt(index - 1);
 				if(nodeToDelete == tail)
 					tail = previousNode;
 				if(previousNode != null)
@@ -133,9 +134,9 @@ public class SingleLinkedList {
 		return nodeToDelete != null ? nodeToDelete.data : null;
 	}
 	
-	public Object getDataAt(int index) {
-		Object data = null;
-		Node node = getNodeAt(index);
+	public T getDataAt(int index) {
+		T data = null;
+		Node<T> node = getNodeAt(index);
 		if(node != null) {
 			data = node.data;
 		}
@@ -146,12 +147,14 @@ public class SingleLinkedList {
 		return noOfNodes;
 	}
 	
-	public Object[] traverse() {
+	public T[] traverse() {
 		if(isEmpty())
 			return null;
 		
-		Node currentNode = head;
-		Object[] out = new Object[noOfNodes];
+		Node<T> currentNode = head;
+		T[] out = null;
+		if(currentNode != null)
+			out = (T[]) Array.newInstance(currentNode.data.getClass(), noOfNodes);
 		int i=0;
 		while(currentNode != null) {
 			out[i] = currentNode.data;
@@ -163,7 +166,7 @@ public class SingleLinkedList {
 	
 	@Override
 	public String toString() {
-		Node currentNode = head;
+		Node<T> currentNode = head;
 		String out = "";
 		while(currentNode != null) {
 			out = out + currentNode + " -> ";

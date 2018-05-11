@@ -1,23 +1,24 @@
 package kar.ds.linkedlist;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
-public class DoubleLinkedList {
+public class DoubleLinkedList<T> {
 
-	private Node head;
-	private Node tail;
+	private Node<T> head;
+	private Node<T> tail;
 	private int noOfNodes = 0;
 
 	public DoubleLinkedList(){
 	}
 	
-	public DoubleLinkedList(List dataList) {
-		for(Object data : dataList)
+	public DoubleLinkedList(List<T> dataList) {
+		for(T data : dataList)
 			insert(data);
 	}
 	
-	public DoubleLinkedList(Object[] dataArray) {
-		for(Object data : dataArray)
+	public DoubleLinkedList(T[] dataArray) {
+		for(T data : dataArray)
 			insert(data);
 	}
 	
@@ -25,7 +26,7 @@ public class DoubleLinkedList {
 		return noOfNodes == 0 && head == null && tail == null ? true : false;
 	}
 	
-	private void removeNode(Node node) {
+	private void removeNode(Node<T> node) {
 		if(node == head && node == tail) {
 			head = tail = null;
 		}else if(node == head) {
@@ -36,8 +37,8 @@ public class DoubleLinkedList {
 			tail = tail.previousNode;
 			tail.nextNode = null;
 		}else {
-			Node leftNode = node.previousNode;
-			Node rightNode = node.nextNode;
+			Node<T> leftNode = node.previousNode;
+			Node<T> rightNode = node.nextNode;
 			//if(leftNode != null) {
 				leftNode.nextNode = rightNode;
 			//}
@@ -49,7 +50,7 @@ public class DoubleLinkedList {
 		}
 	}
 	
-	private Node getNodeAt(int index) {
+	private Node<T> getNodeAt(int index) {
 		if(index < 0 || isEmpty() || index >= noOfNodes)
 			return null;
 		
@@ -60,7 +61,7 @@ public class DoubleLinkedList {
 			return tail;
 		
 		int currentIndex = 0;
-		Node currentNode = head;
+		Node<T> currentNode = head;
 		while(currentIndex != index) {
 			currentIndex++;
 			currentNode = currentNode.nextNode;
@@ -68,32 +69,32 @@ public class DoubleLinkedList {
 		return currentNode;
 	}
 	
-	public void insert(Object data) {
+	public void insert(T data) {
 		if(isEmpty()) {
-			head = tail = new Node(null, data, null);
+			head = tail = new Node<>(null, data, null);
 		}else {
-			Node lastNode = tail;
-			Node newLastNode = new Node(lastNode, data, null);
+			Node<T> lastNode = tail;
+			Node<T> newLastNode = new Node<T>(lastNode, data, null);
 			tail = lastNode.nextNode = newLastNode;
 		}
 		noOfNodes++;
 	}
 	
-	public boolean insertAt(int index, Object data) {
+	public boolean insertAt(int index, T data) {
 		boolean isSuccess = false;
 		if(isEmpty()) {
-			head = tail = new Node(null, data, null);
+			head = tail = new Node<T>(null, data, null);
 			isSuccess = true;
 		}else if(index == 0){
-			Node newNode = new Node(null, data, head);
+			Node<T> newNode = new Node<T>(null, data, head);
 			head.previousNode = newNode;
 			head = newNode;
 			isSuccess = true;
 		}else {
-			Node nodeAtGivenIndex = getNodeAt(index);
+			Node<T> nodeAtGivenIndex = getNodeAt(index);
 			if(nodeAtGivenIndex != null) {
-				Node nodeBeforeGivenIndex = nodeAtGivenIndex.previousNode;
-				Node newNodeAtGivenIndex = new Node(nodeBeforeGivenIndex, data, nodeAtGivenIndex);
+				Node<T> nodeBeforeGivenIndex = nodeAtGivenIndex.previousNode;
+				Node<T> newNodeAtGivenIndex = new Node<T>(nodeBeforeGivenIndex, data, nodeAtGivenIndex);
 				if(nodeBeforeGivenIndex != null)
 					nodeBeforeGivenIndex.nextNode = newNodeAtGivenIndex;
 				nodeAtGivenIndex.previousNode = newNodeAtGivenIndex;
@@ -107,12 +108,12 @@ public class DoubleLinkedList {
 		return isSuccess;
 	}
 	
-	public boolean update(Object data, int index) {
+	public boolean update(T data, int index) {
 		if(isEmpty())
 			return false;
 		
 		boolean isSuccess = false;
-		Node nodeAtGivenIndex = getNodeAt(index);
+		Node<T> nodeAtGivenIndex = getNodeAt(index);
 		if(nodeAtGivenIndex != null) {
 			nodeAtGivenIndex.data = data;
 			isSuccess = true;
@@ -120,9 +121,9 @@ public class DoubleLinkedList {
 		return isSuccess;
 	}
 	
-	public boolean delete(Object data) {
+	public boolean delete(T data) {
 		boolean isSuccess = false;
-		Node currentNode = head;
+		Node<T> currentNode = head;
 		while(currentNode != null) {
 			if(data == currentNode.data) {
 				removeNode(currentNode);
@@ -136,11 +137,11 @@ public class DoubleLinkedList {
 		return isSuccess;
 	}
 	
-	public Object deleteAt(int index) {
+	public T deleteAt(int index) {
 		if(isEmpty())
 			return null;
 		
-		Node nodeToDelete = getNodeAt(index);
+		Node<T> nodeToDelete = getNodeAt(index);
 		if(nodeToDelete != null) {
 			removeNode(nodeToDelete);
 			noOfNodes--;
@@ -148,9 +149,9 @@ public class DoubleLinkedList {
 		return nodeToDelete != null ? nodeToDelete.data : null;
 	}
 	
-	public Object getDataAt(int index) {
-		Object data = null;
-		Node node = getNodeAt(index);
+	public T getDataAt(int index) {
+		T data = null;
+		Node<T> node = getNodeAt(index);
 		if(node != null) {
 			data = node.data;
 		}
@@ -161,39 +162,43 @@ public class DoubleLinkedList {
 		return noOfNodes;
 	}
 	
-	public Object[] traverseForward() {
+	public T[] traverseForward() {
 		if(isEmpty())
 			return null;
 		
-		Node currentNode = head;
-		Object[] out = new Object[noOfNodes];
+		Node<T> currentNode = head;
+		T[] out = null;
+		if(currentNode != null)
+			out = (T[]) Array.newInstance(currentNode.data.getClass(), noOfNodes);
 		int i=0;
 		while(currentNode != null) {
 			out[i] = currentNode.data;
 			currentNode = currentNode.nextNode;
 			i++;
 		}
-		return out;
+		return (T[]) out;
 	}
 	
-	public Object[] traverseReverse() {
+	public T[] traverseReverse() {
 		if(isEmpty())
 			return null;
 		
-		Node currentNode = tail;
-		Object[] out = new Object[noOfNodes];
+		Node<T> currentNode = tail;
+		T[] out = null;
+		if(currentNode != null)
+			out = (T[]) Array.newInstance(currentNode.data.getClass(), noOfNodes);
 		int i = 0;
 		while(currentNode != null) {
 			out[i] = currentNode.data;
 			currentNode = currentNode.previousNode;
 			i++;
 		}
-		return out;
+		return (T[]) out;
 	}
 	
 	@Override
 	public String toString() {
-		Node currentNode = head;
+		Node<T> currentNode = head;
 		String out = "";
 		while(currentNode != null) {
 			out = out + currentNode + " -> ";
