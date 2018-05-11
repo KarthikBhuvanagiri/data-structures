@@ -162,6 +162,7 @@ public class DoubleLinkedList<T> {
 		return noOfNodes;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public T[] traverseForward() {
 		if(isEmpty())
 			return null;
@@ -179,6 +180,7 @@ public class DoubleLinkedList<T> {
 		return (T[]) out;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public T[] traverseReverse() {
 		if(isEmpty())
 			return null;

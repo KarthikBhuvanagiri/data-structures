@@ -147,6 +147,7 @@ public class SingleLinkedList<T> {
 		return noOfNodes;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public T[] traverse() {
 		if(isEmpty())
 			return null;
