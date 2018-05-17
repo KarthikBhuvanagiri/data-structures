@@ -139,16 +139,64 @@ class BinarySearchTreeTest {
 		return new Integer[] {1,2,5,7,10,15,19,25,27,30};
 	}
 	
+	private Integer[] getLevelOrderContentOfRightSkewedTreeAfterRootNodeDeletion() {
+		return new Integer[] {2,5,7,10,15,19,25,27,30};
+	}
+	
+	private Integer[] getLevelOrderContentOfRightSkewedTreeAfterInternalNodeDeletion() {
+		return new Integer[] {1,2,5,7,15,19,25,27,30};
+	}
+	
+	private Integer[] getLevelOrderContentOfRightSkewedTreeAfterLeafNodeDeletion() {
+		return new Integer[] {1,2,5,7,10,15,19,25,27};
+	}
+	
 	private Integer[] getPreOrderContentOfRightSkewedTree() {
 		return new Integer[] {1,2,5,7,10,15,19,25,27,30};
+	}
+	
+	private Integer[] getPreOrderContentOfRightSkewedTreeAfterRootNodeDeletion() {
+		return new Integer[] {2,5,7,10,15,19,25,27,30};
+	}
+	
+	private Integer[] getPreOrderContentOfRightSkewedTreeAfterInternalNodeDeletion() {
+		return new Integer[] {1,2,5,7,15,19,25,27,30};
+	}
+	
+	private Integer[] getPreOrderContentOfRightSkewedTreeAfterLeafNodeDeletion() {
+		return new Integer[] {1,2,5,7,10,15,19,25,27};
 	}
 	
 	private Integer[] getInOrderContentOfRightSkewedTree() {
 		return new Integer[] {1,2,5,7,10,15,19,25,27,30};
 	}
 	
+	private Integer[] getInOrderContentOfRightSkewedTreeAfterRootNodeDeletion() {
+		return new Integer[] {2,5,7,10,15,19,25,27,30};
+	}
+	
+	private Integer[] getInOrderContentOfRightSkewedTreeAfterInternalNodeDeletion() {
+		return new Integer[] {1,2,5,7,15,19,25,27,30};
+	}
+	
+	private Integer[] getInOrderContentOfRightSkewedTreeAfterLeafNodeDeletion() {
+		return new Integer[] {1,2,5,7,10,15,19,25,27};
+	}
+	
 	private Integer[] getPostOrderContentOfRightSkewedTree() {
 		return new Integer[] {30,27,25,19,15,10,7,5,2,1};
+	}
+	
+	private Integer[] getPostOrderContentOfRightSkewedTreeAfterRootNodeDeletion() {
+		return new Integer[] {30,27,25,19,15,10,7,5,2};
+	}
+	
+	private Integer[] getPostOrderContentOfRightSkewedTreeAfterInternalNodeDeletion() {
+		return new Integer[] {30,27,25,19,15,7,5,2,1};
+	}
+	
+	private Integer[] getPostOrderContentOfRightSkewedTreeAfterLeafNodeDeletion() {
+		return new Integer[] {27,25,19,15,10,7,5,2,1};
 	}
 	
 	private Integer getRootNodeInLeftSkewedTree() {
@@ -163,20 +211,68 @@ class BinarySearchTreeTest {
 		return 1;
 	}
 	
-	private Integer[] getTreeContentOfLeftSkewedTree() {
+	private Integer[] getLeftSkewedTreeContent() {
 		return new Integer[] {30,27,25,19,15,10,7,5,2,1};
+	}
+	
+	private Integer[] getLevelOrderContentOfLeftSkewedTreeAfterRootNodeDeletion() {
+		return new Integer[] {27,25,19,15,10,7,5,2,1};
+	}
+	
+	private Integer[] getLevelOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion() {
+		return new Integer[] {30,27,25,19,10,7,5,2,1};
+	}
+	
+	private Integer[] getLevelOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion() {
+		return new Integer[] {30,27,25,19,15,10,7,5,2};
 	}
 	
 	private Integer[] getPreOrderContentOfLeftSkewedTree() {
 		return new Integer[] {30,27,25,19,15,10,7,5,2,1};
 	}
 	
+	private Integer[] getPreOrderContentOfLeftSkewedTreeAfterRootNodeDeletion() {
+		return new Integer[] {27,25,19,15,10,7,5,2,1};
+	}
+	
+	private Integer[] getPreOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion() {
+		return new Integer[] {30,27,25,19,10,7,5,2,1};
+	}
+	
+	private Integer[] getPreOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion() {
+		return new Integer[] {30,27,25,19,15,10,7,5,2};
+	}
+	
 	private Integer[] getInOrderContentOfLeftSkewedTree() {
 		return new Integer[] {1,2,5,7,10,15,19,25,27,30};
 	}
 	
+	private Integer[] getInOrderContentOfLeftSkewedTreeAfterRootNodeDeletion() {
+		return new Integer[] {1,2,5,7,10,15,19,25,27};
+	}
+	
+	private Integer[] getInOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion() {
+		return new Integer[] {1,2,5,7,10,19,25,27,30};
+	}
+	
+	private Integer[] getInOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion() {
+		return new Integer[] {2,5,7,10,15,19,25,27,30};
+	}
+	
 	private Integer[] getPostOrderContentOfLeftSkewedTree() {
 		return new Integer[] {1,2,5,7,10,15,19,25,27,30};
+	}
+	
+	private Integer[] getPostOrderContentOfLeftSkewedTreeAfterRootNodeDeletion() {
+		return new Integer[] {1,2,5,7,10,15,19,25,27};
+	}
+	
+	private Integer[] getPostOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion() {
+		return new Integer[] {1,2,5,7,10,19,25,27,30};
+	}
+	
+	private Integer[] getPostOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion() {
+		return new Integer[] {2,5,7,10,15,19,25,27,30};
 	}
 	
 	@Test
@@ -201,7 +297,7 @@ class BinarySearchTreeTest {
 	
 	@Test
 	void testInsertDescendingOrder() {
-		Integer[] expected = getTreeContentOfLeftSkewedTree();
+		Integer[] expected = getLeftSkewedTreeContent();
 		Tree<Integer> tree = createTree(expected);
 		assertLevelOrderContent(expected, tree);
 		assertPreOrderContent(getPreOrderContentOfLeftSkewedTree(), tree);
@@ -232,12 +328,24 @@ class BinarySearchTreeTest {
 	
 	@Test
 	void tesDeleteRootNodeInRightSkewedTree() {
-		
+		Integer[] expected = getRightSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		tree.delete(getRootNodeInRightSkewedTree());
+		assertLevelOrderContent(getLevelOrderContentOfRightSkewedTreeAfterRootNodeDeletion(), tree);
+		assertPreOrderContent(getPreOrderContentOfRightSkewedTreeAfterRootNodeDeletion(), tree);
+		assertInOrderContent(getInOrderContentOfRightSkewedTreeAfterRootNodeDeletion(), tree);
+		assertPostOrderContent(getPostOrderContentOfRightSkewedTreeAfterRootNodeDeletion(), tree);
 	}
 	
 	@Test
 	void tesDeleteRootNodeInLeftSkewedTree() {
-		
+		Integer[] expected = getLeftSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		tree.delete(getRootNodeInLeftSkewedTree());
+		assertLevelOrderContent(getLevelOrderContentOfLeftSkewedTreeAfterRootNodeDeletion(), tree);
+		assertPreOrderContent(getPreOrderContentOfLeftSkewedTreeAfterRootNodeDeletion(), tree);
+		assertInOrderContent(getInOrderContentOfLeftSkewedTreeAfterRootNodeDeletion(), tree);
+		assertPostOrderContent(getPostOrderContentOfLeftSkewedTreeAfterRootNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -253,12 +361,24 @@ class BinarySearchTreeTest {
 	
 	@Test
 	void testDeleteInternalNodeInRightSkewedTree() {
-		
+		Integer[] expected = getRightSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		tree.delete(getInternalNodeInRightSkewedTree());
+		assertLevelOrderContent(getLevelOrderContentOfRightSkewedTreeAfterInternalNodeDeletion(), tree);
+		assertPreOrderContent(getPreOrderContentOfRightSkewedTreeAfterInternalNodeDeletion(), tree);
+		assertInOrderContent(getInOrderContentOfRightSkewedTreeAfterInternalNodeDeletion(), tree);
+		assertPostOrderContent(getPostOrderContentOfRightSkewedTreeAfterInternalNodeDeletion(), tree);
 	}
 	
 	@Test
 	void testDeleteInternalNodeInLeftSkewedTree() {
-		
+		Integer[] expected = getLeftSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		tree.delete(getInternalNodeInLeftSkewedTree());
+		assertLevelOrderContent(getLevelOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion(), tree);
+		assertPreOrderContent(getPreOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion(), tree);
+		assertInOrderContent(getInOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion(), tree);
+		assertPostOrderContent(getPostOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -274,12 +394,24 @@ class BinarySearchTreeTest {
 	
 	@Test
 	void testDeleteLeafNodeInRightSkewedTree() {
-		
+		Integer[] expected = getRightSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		tree.delete(getLeafNodeInRightSkewedTree());
+		assertLevelOrderContent(getLevelOrderContentOfRightSkewedTreeAfterLeafNodeDeletion(), tree);
+		assertPreOrderContent(getPreOrderContentOfRightSkewedTreeAfterLeafNodeDeletion(), tree);
+		assertInOrderContent(getInOrderContentOfRightSkewedTreeAfterLeafNodeDeletion(), tree);
+		assertPostOrderContent(getPostOrderContentOfRightSkewedTreeAfterLeafNodeDeletion(), tree);
 	}
 	
 	@Test
 	void testDeleteLeafNodeInLeftSkewedTree() {
-		
+		Integer[] expected = getLeftSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		tree.delete(getLeafNodeInLeftSkewedTree());
+		assertLevelOrderContent(getLevelOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion(), tree);
+		assertPreOrderContent(getPreOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion(), tree);
+		assertInOrderContent(getInOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion(), tree);
+		assertPostOrderContent(getPostOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -308,11 +440,16 @@ class BinarySearchTreeTest {
 	
 	@Test
 	void testSearchRootNodeInRightSkewedTree() {
-		
+		Integer[] expected = getRightSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		assertTrue(tree.search(getRootNodeInRightSkewedTree()));
 	}
 	
+	@Test
 	void testSearchRootNodeInLeftSkewedTree() {
-		
+		Integer[] expected = getLeftSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		assertTrue(tree.search(getRootNodeInLeftSkewedTree()));
 	}
 	
 	@Test
@@ -324,11 +461,16 @@ class BinarySearchTreeTest {
 	
 	@Test
 	void testSearchInternalNodeInRightSkewedTree() {
-		
+		Integer[] expected = getRightSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		assertTrue(tree.search(getInternalNodeInRightSkewedTree()));
 	}
 	
+	@Test
 	void testSearchInternalNodeInLeftSkewedTree() {
-		
+		Integer[] expected = getLeftSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		assertTrue(tree.search(getInternalNodeInLeftSkewedTree()));
 	}
 	
 	@Test
@@ -340,11 +482,16 @@ class BinarySearchTreeTest {
 	
 	@Test
 	void testSearchLeafNodeInRightSkewedTree() {
-		
+		Integer[] expected = getRightSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		assertTrue(tree.search(getLeafNodeInRightSkewedTree()));
 	}
 	
+	@Test
 	void testSearchLeafNodeInLeftSkewedTree() {
-		
+		Integer[] expected = getLeftSkewedTreeContent();
+		Tree<Integer> tree = createTree(expected);
+		assertTrue(tree.search(getLeafNodeInLeftSkewedTree()));
 	}
 	
 	@Test
