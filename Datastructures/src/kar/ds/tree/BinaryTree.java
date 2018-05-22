@@ -127,20 +127,24 @@ public class BinaryTree<T> implements Tree<T> {
 
 	@Override
 	public boolean search(T data) {
+		return searchNodeWithData(data) != null ? true : false;
+	}
+	
+	private TreeNode<T> searchNodeWithData(T data){
 		if(isEmpty())
-			return false;
+			return null;
 		
-		boolean isFound = false;
+		TreeNode<T> foundNode = null;
 		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		while(iterator.hasNext()) {
-			TreeNode<T> node = iterator.next();
-			if(node.data == data) {
-				isFound = true;
+			TreeNode<T> currentNode = iterator.next();
+			if(currentNode.data == data) {
+				foundNode = currentNode;
 				break;
 			}
 		}
 		
-		return isFound;
+		return foundNode;
 	}
 
 	@Override
