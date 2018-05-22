@@ -10,4 +10,5 @@ public interface Tree<T> {
 	public T[] traverseInOrder();
 	public T[] traversePreOrder();
 	public T[] traversePostOrder();
+	public int getHeightOf(T data);
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class BinaryTree<T> implements Tree<T> {
 
 	private TreeNode<T> root;
+	private boolean recalculateHeight;
 	
 	public BinaryTree() {
 	}
@@ -26,6 +27,7 @@ public class BinaryTree<T> implements Tree<T> {
 					break;
 				}
 			}
+			recalculateHeight = true;
 		}
 	}
 	
@@ -43,6 +45,7 @@ public class BinaryTree<T> implements Tree<T> {
 				break;
 			}
 		}
+		recalculateHeight = true;
 	}
 	
 	public void insertAsRightChildOf(T parent, T dataToInsert) {
@@ -59,6 +62,7 @@ public class BinaryTree<T> implements Tree<T> {
 				break;
 			}
 		}
+		recalculateHeight = true;
 	}
 	
 	public void deleteLeftChildOf(T parent) {
@@ -74,6 +78,7 @@ public class BinaryTree<T> implements Tree<T> {
 				break;
 			}
 		}
+		recalculateHeight = true;
 	}
 	
 	public void deleteRightChildOf(T parent) {
@@ -89,6 +94,7 @@ public class BinaryTree<T> implements Tree<T> {
 				break;
 			}
 		}
+		recalculateHeight = true;
 	}
 
 	@Override
@@ -109,6 +115,7 @@ public class BinaryTree<T> implements Tree<T> {
 		if(nodeToDelete != null) {
 			nodeToDelete.data = deepestRightMostNode.data;
 			deleteLeafNode(deepestRightMostNode);
+			recalculateHeight = true;
 		}
 		
 	}
@@ -214,6 +221,19 @@ public class BinaryTree<T> implements Tree<T> {
 		@SuppressWarnings("unchecked")
 		T[] out = (T[]) Array.newInstance(root.data.getClass(), visitedNodes.size());
 		return visitedNodes.toArray(out);
+	}
+
+	@Override
+	public int getHeightOf(T data) {
+		if(recalculateHeight) {
+			BinaryTreeUtils.calculateHeightOfAllNodesOfTree(root);
+			recalculateHeight = false;
+		}
+		int currentNodeHeight = -1;
+		TreeNode<T> currentNode = searchNodeWithData(data);
+		if(currentNode != null)
+			currentNodeHeight = currentNode.height;
+		return currentNodeHeight;
 	}
 
 }

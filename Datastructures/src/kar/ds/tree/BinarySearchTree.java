@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
 	private TreeNode<T> root;
+	private boolean recalculateHeight;
 
 	@Override
 	public void insert(T data) {
@@ -31,6 +32,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 					}
 				}
 			}
+			recalculateHeight = true;
 		}
 	}
 
@@ -84,6 +86,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 				else if(parentNode.rightNode == nodeToDelete)
 					parentNode.rightNode = minNode;
 			}
+			recalculateHeight = true;
 		}
 	}
 	
@@ -187,6 +190,19 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		@SuppressWarnings("unchecked")
 		T[] out = (T[]) Array.newInstance(root.data.getClass(), visitedNodes.size());
 		return visitedNodes.toArray(out);
+	}
+
+	@Override
+	public int getHeightOf(T data) {
+		if(recalculateHeight) {
+			BinaryTreeUtils.calculateHeightOfAllNodesOfTree(root);
+			recalculateHeight = false;
+		}
+		int currentNodeHeight = -1;
+		TreeNode<T> currentNode = searchNodeWithData(data);
+		if(currentNode != null)
+			currentNodeHeight = currentNode.height;
+		return currentNodeHeight;
 	}
 
 }
