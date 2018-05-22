@@ -32,7 +32,7 @@ class BinaryTreeTest {
 		assertArrayEquals(expected, actual);
 	}
 	
-	protected Tree<String> createTree(String[] nodes) {
+	private Tree<String> createTree(String[] nodes) {
 		Tree<String> tree = new BinaryTree<String>();
 		if(nodes != null) {
 			for(String node : nodes) {
@@ -42,243 +42,243 @@ class BinaryTreeTest {
 		return tree;
 	}
 	
-	protected Tree<String> createEmptyTree() {
+	private Tree<String> createEmptyTree() {
 		return new BinaryTree<String>();
 	}
 	
-	protected String[] getTreeContent() {
+	private String[] getTreeContent() {
 		return new String[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O"};
 	}
 	
-	protected String[] getPreOrderContent() {
+	private String[] getPreOrderContent() {
 		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","M","G","N","O"};
 	}
 	
-	protected String[] getInOrderContent() {
+	private String[] getInOrderContent() {
 		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O"};
 	}
 	
-	protected String[] getPostOrderContent() {
+	private String[] getPostOrderContent() {
 		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","C","A"};
 	}
 	
-	protected String getRootNode() {
+	private String getRootNode() {
 		return "A";
 	}
 	
-	protected String[] getLevelOrderContentAfterInsertAtRightChildOfRoot() {
+	private String[] getLevelOrderContentAfterInsertAtRightChildOfRoot() {
 		return new String[] {"A","B","X","D","E","C","H","I","J","K","F","G","L","M","N","O"};
 	}
 	
-	protected String[] getLevelOrderContentAfterInsertAsLeftChildOfRoot() {
+	private String[] getLevelOrderContentAfterInsertAsLeftChildOfRoot() {
 		return new String[] {"A","X","C","B","F","G","D","E","L","M","N","O","H","I","J","K"};
 	}
 	
-	protected String[] getLevelOrderContentAfterRootNodeDeletion() {
+	private String[] getLevelOrderContentAfterRootNodeDeletion() {
 		return new String[] {"O","B","C","D","E","F","G","H","I","J","K","L","M","N"};
 	}
 	
-	protected String[] getLevelOrderContentAfterDeletingLeftChildOfRoot() {
+	private String[] getLevelOrderContentAfterDeletingLeftChildOfRoot() {
 		return new String[] {"A","C","F","G","L","M","N","O"};
 	}
 	
-	protected String[] getLevelOrderContentAfterDeletingRightChildOfRoot() {
+	private String[] getLevelOrderContentAfterDeletingRightChildOfRoot() {
 		return new String[] {"A","B","D","E","H","I","J","K"};
 	}
 	
-	protected String[] getPreOrderContentAfterInsertAtRightChildOfRoot() {
+	private String[] getPreOrderContentAfterInsertAtRightChildOfRoot() {
 		return new String[] {"A","B","D","H","I","E","J","K","X","C","F","L","M","G","N","O"};
 	}
 	
-	protected String[] getPreOrderContentAfterInsertAsLeftChildOfRoot() {
+	private String[] getPreOrderContentAfterInsertAsLeftChildOfRoot() {
 		return new String[] {"A","X","B","D","H","I","E","J","K","C","F","L","M","G","N","O"};
 	}
 	
-	protected String[] getPreOrderContentAfterRootNodeDeletion() {
+	private String[] getPreOrderContentAfterRootNodeDeletion() {
 		return new String[] {"O","B","D","H","I","E","J","K","C","F","L","M","G","N"};
 	}
 	
-	protected String[] getPreOrderContentAfterDeletingLeftChildOfRoot() {
+	private String[] getPreOrderContentAfterDeletingLeftChildOfRoot() {
 		return new String[] {"A","C","F","L","M","G","N","O"};
 	}
 	
-	protected String[] getPreOrderContentAfterDeletingRightChildOfRoot() {
+	private String[] getPreOrderContentAfterDeletingRightChildOfRoot() {
 		return new String[] {"A","B","D","H","I","E","J","K"};
 	}
 	
-	protected String[] getInOrderContentAfterInsertAsRightChildOfRoot() {
+	private String[] getInOrderContentAfterInsertAsRightChildOfRoot() {
 		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O","X"};
 	}
 	
-	protected String[] getInOrderContentAfterInsertAsLeftChildOfRoot() {
+	private String[] getInOrderContentAfterInsertAsLeftChildOfRoot() {
 		return new String[] {"H","D","I","B","J","E","K","X","A","L","F","M","C","N","G","O"};
 	}
 	
-	protected String[] getInOrderContentAfterRootNodeDeletion() {
+	private String[] getInOrderContentAfterRootNodeDeletion() {
 		return new String[] {"H","D","I","B","J","E","K","O","L","F","M","C","N","G"};
 	}
 	
-	protected String[] getInOrderContentAfterDeletingLeftChildOfRoot() {
+	private String[] getInOrderContentAfterDeletingLeftChildOfRoot() {
 		return new String[] {"A","L","F","M","C","N","G","O"};
 	}
 	
-	protected String[] getInOrderContentAfterDeletingRightChildOfRoot() {
+	private String[] getInOrderContentAfterDeletingRightChildOfRoot() {
 		return new String[] {"H","D","I","B","J","E","K","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterInsertAsRightChildOfRoot() {
+	private String[] getPostOrderContentAfterInsertAsRightChildOfRoot() {
 		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","C","X","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterInsertAsLeftChildOfRoot() {
+	private String[] getPostOrderContentAfterInsertAsLeftChildOfRoot() {
 		return new String[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterRootNodeDeletion() {
+	private String[] getPostOrderContentAfterRootNodeDeletion() {
 		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","G","C","O"};
 	}
 	
-	protected String[] getPostOrderContentAfterDeletingLeftChildOfRoot() {
+	private String[] getPostOrderContentAfterDeletingLeftChildOfRoot() {
 		return new String[] {"L","M","F","N","O","G","C","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterDeletingRightChildOfRoot() {
+	private String[] getPostOrderContentAfterDeletingRightChildOfRoot() {
 		return new String[] {"H","I","D","J","K","E","B","A"};
 	}
 	
-	protected String getInternalNode() {
+	private String getInternalNode() {
 		return "C";
 	}
 	
-	protected String[] getLevelOrderContentAfterInsertAsRightChildOfInternalNode() {
+	private String[] getLevelOrderContentAfterInsertAsRightChildOfInternalNode() {
 		return new String[] {"A","B","C","D","E","F","X","H","I","J","K","L","M","G","N","O"};
 	}
 	
-	protected String[] getLevelOrderContentAfterInsertAsLeftChildOfInternalNode() {
+	private String[] getLevelOrderContentAfterInsertAsLeftChildOfInternalNode() {
 		return new String[] {"A","B","C","D","E","X","G","H","I","J","K","F","N","O","L","M"};
 	}
 	
-	protected String[] getLevelOrderContentAfterInternalNodeDeletion() {
+	private String[] getLevelOrderContentAfterInternalNodeDeletion() {
 		return new String[] {"A","B","O","D","E","F","G","H","I","J","K","L","M","N"};
 	}
 	
-	protected String[] getLevelOrderContentAfterDeletingLeftChildOfInternalNode() {
+	private String[] getLevelOrderContentAfterDeletingLeftChildOfInternalNode() {
 		return new String[] {"A","B","C","D","E","G","H","I","J","K","N","O"};
 	}
 	
-	protected String[] getLevelOrderContentAfterDeletingRightChildOfInternalNode() {
+	private String[] getLevelOrderContentAfterDeletingRightChildOfInternalNode() {
 		return new String[] {"A","B","C","D","E","F","H","I","J","K","L","M"};
 	}
 	
-	protected String[] getPreOrderContentAfterInsertAsRightChildOfInternalNode() {
+	private String[] getPreOrderContentAfterInsertAsRightChildOfInternalNode() {
 		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","M","X","G","N","O"};
 	}
 	
-	protected String[] getPreOrderContentAfterInsertAsLeftChildOfInternalNode() {
+	private String[] getPreOrderContentAfterInsertAsLeftChildOfInternalNode() {
 		return new String[] {"A","B","D","H","I","E","J","K","C","X","F","L","M","G","N","O"};
 	}
 	
-	protected String[] getPreOrderContentAfterInternalNodeDeletion() {
+	private String[] getPreOrderContentAfterInternalNodeDeletion() {
 		return new String[] {"A","B","D","H","I","E","J","K","O","F","L","M","G","N"};
 	}
 	
-	protected String[] getPreOrderContentAfterDeletingLeftChildOfInternalNode() {
+	private String[] getPreOrderContentAfterDeletingLeftChildOfInternalNode() {
 		return new String[] {"A","B","D","H","I","E","J","K","C","G","N","O"};
 	}
 	
-	protected String[] getPreOrderContentAfterDeletingRightChildOfInternalNode() {
+	private String[] getPreOrderContentAfterDeletingRightChildOfInternalNode() {
 		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","M"};
 	}
 	
-	protected String[] getInOrderContentAfterInsertAsRightChildOfInternalNode() {
+	private String[] getInOrderContentAfterInsertAsRightChildOfInternalNode() {
 		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","C","N","G","O","X"};
 	}
 	
-	protected String[] getInOrderContentAfterInsertAsLeftChildOfInternalNode() {
+	private String[] getInOrderContentAfterInsertAsLeftChildOfInternalNode() {
 		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","X","C","N","G","O"};
 	}
 	
-	protected String[] getInOrderContentAfterInternalNodeDeletion() {
+	private String[] getInOrderContentAfterInternalNodeDeletion() {
 		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","O","N","G"};
 	}
 	
-	protected String[] getInOrderContentAfterDeletingLeftChildOfInternalNode() {
+	private String[] getInOrderContentAfterDeletingLeftChildOfInternalNode() {
 		return new String[] {"H","D","I","B","J","E","K","A","C","N","G","O"};
 	}
 	
-	protected String[] getInOrderContentAfterDeletingRightChildOfInternalNode() {
+	private String[] getInOrderContentAfterDeletingRightChildOfInternalNode() {
 		return new String[] {"H","D","I","B","J","E","K","A","L","F","M","C"};
 	}
 	
-	protected String[] getPostOrderContentAfterInsertAsRightChildOfInternalNode() {
+	private String[] getPostOrderContentAfterInsertAsRightChildOfInternalNode() {
 		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","O","G","X","C","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterInsertAsLeftChildOfInternalNode() {
+	private String[] getPostOrderContentAfterInsertAsLeftChildOfInternalNode() {
 		return new String[] {"H","I","D","J","K","E","B","L","M","F","X","N","O","G","C","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterInternalNodeDeletion() {
+	private String[] getPostOrderContentAfterInternalNodeDeletion() {
 		return new String[] {"H","I","D","J","K","E","B","L","M","F","N","G","O","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterDeletingLeftChildOfInternalNode() {
+	private String[] getPostOrderContentAfterDeletingLeftChildOfInternalNode() {
 		return new String[] {"H","I","D","J","K","E","B","N","O","G","C","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterDeletingRightChildOfInternalNode() {
+	private String[] getPostOrderContentAfterDeletingRightChildOfInternalNode() {
 		return new String[] {"H","I","D","J","K","E","B","L","M","F","C","A"};
 	}
 	
-	protected String getLeafNode() {
+	private String getLeafNode() {
 		return "L";
 	}
 	
-	protected String[] getLevelOrderContentAfterInsertAsRightChildOfLeafNode() {
+	private String[] getLevelOrderContentAfterInsertAsRightChildOfLeafNode() {
 		return new String[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","X"};
 	}
 	
-	protected String[] getLevelOrderContentAfterInsertAsLeftChildOfLeafNode() {
+	private String[] getLevelOrderContentAfterInsertAsLeftChildOfLeafNode() {
 		return new String[] {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","X"};
 	}
 	
-	protected String[] getLevelOrderContentAfterLeafNodeDeletion() {
+	private String[] getLevelOrderContentAfterLeafNodeDeletion() {
 		return new String[] {"A","B","C","D","E","F","G","H","I","J","K","O","M","N"};
 	}
 	
-	protected String[] getPreOrderContentAfterInsertAsRightChildOfLeafNode() {
+	private String[] getPreOrderContentAfterInsertAsRightChildOfLeafNode() {
 		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","X","M","G","N","O"};
 	}
 	
-	protected String[] getPreOrderContentAfterInsertAsLeftChildOfLeafNode() {
+	private String[] getPreOrderContentAfterInsertAsLeftChildOfLeafNode() {
 		return new String[] {"A","B","D","H","I","E","J","K","C","F","L","X","M","G","N","O"};
 	}
 	
-	protected String[] getPreOrderContentAfterLeafNodeDeletion() {
+	private String[] getPreOrderContentAfterLeafNodeDeletion() {
 		return new String[] {"A","B","D","H","I","E","J","K","C","F","O","M","G","N"};
 	}
 	
-	protected String[] getInOrderContentAfterInsertAsRightChildOfLeafNode() {
+	private String[] getInOrderContentAfterInsertAsRightChildOfLeafNode() {
 		return new String[] {"H","D","I","B","J","E","K","A","L","X","F","M","C","N","G","O"};
 	}
 	
-	protected String[] getInOrderContentAfterInsertAsLeftChildOfLeafNode() {
+	private String[] getInOrderContentAfterInsertAsLeftChildOfLeafNode() {
 		return new String[] {"H","D","I","B","J","E","K","A","X","L","F","M","C","N","G","O"};
 	}
 	
-	protected String[] getInOrderContentAfterLeafNodeDeletion() {
+	private String[] getInOrderContentAfterLeafNodeDeletion() {
 		return new String[] {"H","D","I","B","J","E","K","A","O","F","M","C","N","G"};
 	}
 	
-	protected String[] getPostOrderContentAfterInsertAsRightChildOfLeafNode() {
+	private String[] getPostOrderContentAfterInsertAsRightChildOfLeafNode() {
 		return new String[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterInsertAsLeftChildOfLeafNode() {
+	private String[] getPostOrderContentAfterInsertAsLeftChildOfLeafNode() {
 		return new String[] {"H","I","D","J","K","E","B","X","L","M","F","N","O","G","C","A"};
 	}
 	
-	protected String[] getPostOrderContentAfterLeafNodeDeletion() {
+	private String[] getPostOrderContentAfterLeafNodeDeletion() {
 		return new String[] {"H","I","D","J","K","E","B","O","M","F","N","G","C","A"};
 	}
 	
