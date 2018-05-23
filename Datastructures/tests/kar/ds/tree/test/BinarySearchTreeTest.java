@@ -1,6 +1,7 @@
 package kar.ds.tree.test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -31,6 +32,13 @@ class BinarySearchTreeTest {
 	private void assertPostOrderContent(Integer[] expected, Tree<Integer> tree) {
 		Integer[] actual = tree.traversePostOrder();
 		assertArrayEquals(expected, actual);
+	}
+	
+	private void assertHeights(int[] expectedHeights, Tree<Integer> tree) {
+		Integer[] keys = tree.traverseLevelOrder();
+		for(int i=0; i<keys.length; i++) {
+			assertEquals(expectedHeights[i], tree.getHeightOf(keys[i]));
+		}
 	}
 	
 	private Tree<Integer> createTree(Integer[] nodes) {
@@ -275,6 +283,54 @@ class BinarySearchTreeTest {
 		return new Integer[] {2,5,7,10,15,19,25,27,30};
 	}
 	
+	private int[] getHeightOfAllNodes() {
+		return new int[] {4,3,3,2,1,2,2,0,1,0,0,1,0,1,0,0,0,0};
+	}
+	
+	private int[] getHeightOfAllNodesAfterDeletingRootNode() {
+		return new int[] {4,3,3,2,1,1,2,0,1,0,0,0,0,1,0,0,0};
+	}
+	
+	private int[] getHeightOfAllNodesAfterDeletingInternalNode() {
+		return new int[] {4,3,3,2,1,2,1,0,1,0,0,1,0,0,0,0,0};
+	}
+	
+	private int[] getHeightOfAllNodesAfterDeletingLeafNode() {
+		return new int[] {4,3,3,2,1,2,2,0,1,0,1,0,1,0,0,0,0};
+	}
+	
+	private int[] getHeightOfAllNodesInLeftSkewedTree() {
+		return new int[] {9,8,7,6,5,4,3,2,1,0};
+	}
+	
+	private int[] getHeightOfAllNodesInLeftSkewedTreeAfterRootNodeDeletion() {
+		return new int[] {8,7,6,5,4,3,2,1,0};
+	}
+	
+	private int[] getHeightOfAllNodesInLeftSkewedTreeAfterInternalNodeDeletion() {
+		return new int[] {8,7,6,5,4,3,2,1,0};
+	}
+	
+	private int[] getHeightOfAllNodesInLeftSkewedTreeAfterLeafNodeDeletion() {
+		return new int[] {8,7,6,5,4,3,2,1,0};
+	}
+	
+	private int[] getHeightOfAllNodesInRightSkewedTree() {
+		return new int[] {9,8,7,6,5,4,3,2,1,0};
+	}
+	
+	private int[] getHeightOfAllNodesInRightSkewedTreeAfterRootNodeDeletion() {
+		return new int[] {8,7,6,5,4,3,2,1,0};
+	}
+	
+	private int[] getHeightOfAllNodesInRightSkewedTreeAfterInternalNodeDeletion() {
+		return new int[] {8,7,6,5,4,3,2,1,0};
+	}
+	
+	private int[] getHeightOfAllNodesInRightSkewedTreeAfterLeafNodeDeletion() {
+		return new int[] {8,7,6,5,4,3,2,1,0};
+	}
+	
 	@Test
 	void testInsert() {
 		Integer[] expected = getTreeContent();
@@ -283,6 +339,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContent(), tree);
 		assertInOrderContent(getInOrderContent(), tree);
 		assertPostOrderContent(getPostOrderContent(), tree);
+		assertHeights(getHeightOfAllNodes(), tree);
 	}
 	
 	@Test
@@ -293,6 +350,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentOfRightSkewedTree(), tree);
 		assertInOrderContent(getInOrderContentOfRightSkewedTree(), tree);
 		assertPostOrderContent(getPostOrderContentOfRightSkewedTree(), tree);
+		assertHeights(getHeightOfAllNodesInRightSkewedTree(), tree);
 	}
 	
 	@Test
@@ -303,6 +361,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentOfLeftSkewedTree(), tree);
 		assertInOrderContent(getInOrderContentOfLeftSkewedTree(), tree);
 		assertPostOrderContent(getPostOrderContentOfLeftSkewedTree(), tree);
+		assertHeights(getHeightOfAllNodesInLeftSkewedTree(), tree);
 	}
 	
 	@Test
@@ -324,6 +383,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentAfterRootNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentAfterRootNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentAfterRootNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesAfterDeletingRootNode(), tree);
 	}
 	
 	@Test
@@ -335,6 +395,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentOfRightSkewedTreeAfterRootNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentOfRightSkewedTreeAfterRootNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentOfRightSkewedTreeAfterRootNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesInRightSkewedTreeAfterRootNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -346,6 +407,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentOfLeftSkewedTreeAfterRootNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentOfLeftSkewedTreeAfterRootNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentOfLeftSkewedTreeAfterRootNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesInLeftSkewedTreeAfterRootNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -357,6 +419,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentAfterInternalNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentAfterInternalNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentAfterInternalNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesAfterDeletingInternalNode(), tree);
 	}
 	
 	@Test
@@ -368,6 +431,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentOfRightSkewedTreeAfterInternalNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentOfRightSkewedTreeAfterInternalNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentOfRightSkewedTreeAfterInternalNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesInRightSkewedTreeAfterInternalNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -379,6 +443,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentOfLeftSkewedTreeAfterInternalNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesInLeftSkewedTreeAfterInternalNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -390,6 +455,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentAfterLeafNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentAfterLeafNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentAfterLeafNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesAfterDeletingLeafNode(), tree);
 	}
 	
 	@Test
@@ -401,6 +467,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentOfRightSkewedTreeAfterLeafNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentOfRightSkewedTreeAfterLeafNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentOfRightSkewedTreeAfterLeafNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesInRightSkewedTreeAfterLeafNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -412,6 +479,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion(), tree);
 		assertInOrderContent(getInOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion(), tree);
 		assertPostOrderContent(getPostOrderContentOfLeftSkewedTreeAfterLeafNodeDeletion(), tree);
+		assertHeights(getHeightOfAllNodesInLeftSkewedTreeAfterLeafNodeDeletion(), tree);
 	}
 	
 	@Test
@@ -423,6 +491,7 @@ class BinarySearchTreeTest {
 		assertPreOrderContent(getPreOrderContent(), tree);
 		assertInOrderContent(getInOrderContent(), tree);
 		assertPostOrderContent(getPostOrderContent(), tree);
+		assertHeights(getHeightOfAllNodes(), tree);
 	}
 	
 	@Test
