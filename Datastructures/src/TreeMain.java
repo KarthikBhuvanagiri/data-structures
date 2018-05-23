@@ -130,13 +130,15 @@ public class TreeMain {
 	private static void handleSearchOption(CommandLine commandLine) {
 		String nodeToSearch = commandLine.getOptionValue(OPTION_SEARCH);
 		if(tree != null) {
+			boolean found;
 			if(type.equals(TYPE_INT)) {
-				tree.search(Integer.parseInt(nodeToSearch));
+				found = tree.search(Integer.parseInt(nodeToSearch));
 			}else if(type.equals(TYPE_DECIMAL)) {
-				tree.search(Double.parseDouble(nodeToSearch));
+				found = tree.search(Double.parseDouble(nodeToSearch));
 			}else {
-				tree.search(nodeToSearch);
+				found = tree.search(nodeToSearch);
 			}
+			System.out.println(found ? "Found" : "Not Found");
 		}else {
 			System.out.println("Tree is null. Use option \'"+OPTION_CREATE+"\' to build tree");
 		}
@@ -187,12 +189,12 @@ public class TreeMain {
 		String nodeToInsert = commandLine.getOptionValue(OPTION_INSERT);
 		if(commandLine.hasOption(OPTION_LEFT_OF)) {
 			if(tree instanceof BinaryTree)
-				((BinaryTree) tree).insertAsLeftChildOf(commandLine.getOptionValue(OPTION_INSERT), nodeToInsert);
+				((BinaryTree) tree).insertAsLeftChildOf(commandLine.getOptionValue(OPTION_LEFT_OF), nodeToInsert);
 			else
 				System.out.println("Option \'"+OPTION_LEFT_OF+"\' is not valid for binary search tree");
 		}else if(commandLine.hasOption(OPTION_RIGHT_OF)) {
 			if(tree instanceof BinaryTree)
-				((BinaryTree) tree).insertAsRightChildOf(commandLine.getOptionValue(OPTION_INSERT), nodeToInsert);
+				((BinaryTree) tree).insertAsRightChildOf(commandLine.getOptionValue(OPTION_RIGHT_OF), nodeToInsert);
 			else
 				System.out.println("Option \'"+OPTION_RIGHT_OF+"\' is not valid for binary search tree");
 		}else {
