@@ -483,6 +483,17 @@ class BinaryTreeTest {
 		assertInOrderContent(null, tree);
 		assertPostOrderContent(null, tree);
 	}
+	
+	@Test
+	void testDeleteNodeFromTreeWithSingleNode() {
+		Tree<String> tree = createTree(null);
+		tree.insert("A");
+		tree.delete("A");
+		assertLevelOrderContent(null, tree);
+		assertPreOrderContent(null, tree);
+		assertInOrderContent(null, tree);
+		assertPostOrderContent(null, tree);
+	}
 
 	@Test
 	void testDeleteRootNode() {
