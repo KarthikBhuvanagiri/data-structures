@@ -39,7 +39,7 @@ public class BinaryTree<T> implements Tree<T> {
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
-			if(currentNode.data == parent) {
+			if(currentNode.data.equals(parent)) {
 				TreeNode<T> newNode = new TreeNode<T>(currentNode.leftNode, dataToInsert, null);
 				currentNode.leftNode = newNode;
 				break;
@@ -56,7 +56,7 @@ public class BinaryTree<T> implements Tree<T> {
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
-			if(currentNode.data == parent) {
+			if(currentNode.data.equals(parent)) {
 				TreeNode<T> newNode = new TreeNode<T>(currentNode.rightNode, dataToInsert, null);
 				currentNode.rightNode = newNode;
 				break;
@@ -73,7 +73,7 @@ public class BinaryTree<T> implements Tree<T> {
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
-			if(currentNode.data == parent) {
+			if(currentNode.data.equals(parent)) {
 				currentNode.leftNode = null;
 				break;
 			}
@@ -89,7 +89,7 @@ public class BinaryTree<T> implements Tree<T> {
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
-			if(currentNode.data == parent) {
+			if(currentNode.data.equals(parent)) {
 				currentNode.rightNode = null;
 				break;
 			}
@@ -107,7 +107,7 @@ public class BinaryTree<T> implements Tree<T> {
 		TreeNode<T> deepestRightMostNode = null; //Deepest rightmost node
 		while(iterator.hasNext()) {
 			TreeNode<T> node = deepestRightMostNode = iterator.next();
-			if(node.data == data) {
+			if(node.data.equals(data)) {
 				nodeToDelete = node;
 			}
 		}
@@ -121,6 +121,10 @@ public class BinaryTree<T> implements Tree<T> {
 	}
 	
 	private void deleteLeafNode(TreeNode<T> leafNode) {
+		if(leafNode == root) {
+			root = null;
+			return;
+		}
 		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		while(iterator.hasNext()) {
 			TreeNode<T> node = iterator.next();
