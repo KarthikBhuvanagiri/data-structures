@@ -698,5 +698,12 @@ class BinaryTreeTest {
 		Tree<String> tree = createEmptyTree();
 		assertTrue(tree.isEmpty());
 	}
+	
+	@Test
+	void testHeightOfNonExistentNode() {
+		Tree<String> tree = createTree(getTreeContent());
+		int height = tree.getHeightOf("X");
+		assertEquals(-1, height);
+	}
 
 }
