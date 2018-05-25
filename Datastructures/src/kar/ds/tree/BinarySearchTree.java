@@ -3,10 +3,11 @@ package kar.ds.tree;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import kar.ds.stack.Stack;
+
 public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
 	private TreeNode<T> root;
-	private boolean recalculateHeight;
 
 	@Override
 	public void insert(T data) {
@@ -14,26 +15,36 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 			root = new TreeNode<T>(null, data, null);
 		}else {
 			TreeNode<T> currentNode = root;
+			Stack<TreeNode<T>> stack = new Stack();
 			while(currentNode != null) {
 				int x = data.compareTo(currentNode.data);
 				if(x < 0) {
 					if(currentNode.leftNode == null) {
 						currentNode.leftNode = new TreeNode<T>(null, data, null);
+						currentNode.height = 1 + Math.max(currentNode.leftNode.height, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
 						break;
 					}else {
+						stack.push(currentNode);
 						currentNode = currentNode.leftNode;
 					}
 				}else if(x > 0) {
 					if(currentNode.rightNode == null) {
 						currentNode.rightNode = new TreeNode<T>(null, data, null);
+						currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode.height);
 						break;
 					}else {
+						stack.push(currentNode);
 						currentNode = currentNode.rightNode;
 					}
 				}
 			}
-			recalculateHeight = true;
+			
+			while(!stack.isEmpty()) {
+				currentNode = stack.pop();
+				currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
+			}
 		}
+		
 	}
 
 	@Override
@@ -41,21 +52,25 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		TreeNode<T> currentNode = root;
 		TreeNode<T> parentNode = null;
 		TreeNode<T> nodeToDelete = null;
+		Stack<TreeNode<T>> stack = new Stack();
 		while(currentNode != null) {
 			int x = data.compareTo(currentNode.data);
 			if(x == 0) {
 				nodeToDelete = currentNode;
 				break;
 			}else if(x < 0) {
+				stack.push(currentNode);
 				parentNode = currentNode;
 				currentNode = currentNode.leftNode;
 			}else {
+				stack.push(currentNode);
 				parentNode = currentNode;
 				currentNode = currentNode.rightNode;
 			}
 		}
 		
 		if(nodeToDelete != null) {
+			
 			if(nodeToDelete.leftNode == null && nodeToDelete.rightNode == null) { //node to be deleted is leaf node
 				if(root == nodeToDelete)
 					root = null;
@@ -77,16 +92,18 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 			}else { //node to be deleted has two children
 				TreeNode<T> minNode = findMinNode(nodeToDelete.rightNode);
 				delete(minNode.data);
-				minNode.leftNode = nodeToDelete.leftNode;
-				minNode.rightNode = nodeToDelete.rightNode;
 				if(root == nodeToDelete)
-					root = minNode;
+					root.data = minNode.data;
 				else if(parentNode.leftNode == nodeToDelete)
-					parentNode.leftNode = minNode;
+					parentNode.leftNode.data = minNode.data;
 				else if(parentNode.rightNode == nodeToDelete)
-					parentNode.rightNode = minNode;
+					parentNode.rightNode.data = minNode.data;
 			}
-			recalculateHeight = true;
+			
+			while(!stack.isEmpty()) {
+				currentNode = stack.pop();
+				currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
+			}
 		}
 	}
 	
@@ -194,10 +211,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
 	@Override
 	public int getHeightOf(T data) {
-		if(recalculateHeight) {
-			BinaryTreeUtils.calculateHeightOfAllNodesOfTree(root);
-			recalculateHeight = false;
-		}
 		int currentNodeHeight = -1;
 		TreeNode<T> currentNode = searchNodeWithData(data);
 		if(currentNode != null)
