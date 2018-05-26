@@ -95,11 +95,11 @@ public class BinaryTree<T> implements Tree<T> {
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
+			stack.push(currentNode);
 			if(currentNode.data.equals(parent)) {
 				currentNode.leftNode = null;
 				break;
 			}
-			stack.push(currentNode);
 		}
 		while(!stack.isEmpty()) {
 			currentNode = stack.pop();
@@ -116,11 +116,11 @@ public class BinaryTree<T> implements Tree<T> {
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
+			stack.push(currentNode);
 			if(currentNode.data.equals(parent)) {
 				currentNode.rightNode = null;
 				break;
 			}
-			stack.push(currentNode);
 		}
 		while(!stack.isEmpty()) {
 			currentNode = stack.pop();
@@ -185,7 +185,7 @@ public class BinaryTree<T> implements Tree<T> {
 		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		while(iterator.hasNext()) {
 			TreeNode<T> currentNode = iterator.next();
-			if(currentNode.data == data) {
+			if(currentNode.data.equals(data)) {
 				foundNode = currentNode;
 				break;
 			}
