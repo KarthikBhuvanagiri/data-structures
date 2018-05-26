@@ -3,10 +3,11 @@ package kar.ds.tree;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+import kar.ds.stack.Stack;
+
 public class BinaryTree<T> implements Tree<T> {
 
 	private TreeNode<T> root;
-	private boolean recalculateHeight;
 	
 	public BinaryTree() {
 	}
@@ -16,18 +17,26 @@ public class BinaryTree<T> implements Tree<T> {
 		if(root == null) {
 			root = new TreeNode<T>(null, data, null);
 		}else {
+			Stack<TreeNode<T>> stack = new Stack();
 			LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 			while(iterator.hasNext()) {
 				TreeNode<T> node = iterator.next();
 				if(node.leftNode == null) {
 					node.leftNode = new TreeNode<T>(null, data, null);
+					node.height = 1 + Math.max(node.leftNode.height, node.rightNode != null ? node.rightNode.height : -1);
 					break;
 				}else if(node.rightNode == null) {
 					node.rightNode = new TreeNode<T>(null, data, null);
+					node.height = 1 + Math.max(node.leftNode != null ? node.leftNode.height : -1, node.rightNode.height);
 					break;
 				}
+				stack.push(node);
 			}
-			recalculateHeight = true;
+//			recalculateHeight = true;
+			while(!stack.isEmpty()) {
+				TreeNode<T> currentNode = stack.pop();
+				currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
+			}
 		}
 	}
 	
@@ -35,40 +44,53 @@ public class BinaryTree<T> implements Tree<T> {
 		if(isEmpty())
 			return;
 		
+		Stack<TreeNode<T>> stack = new Stack();
 		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
+			stack.push(currentNode);
 			if(currentNode.data.equals(parent)) {
 				TreeNode<T> newNode = new TreeNode<T>(currentNode.leftNode, dataToInsert, null);
+				newNode.height = 1 + (newNode.leftNode != null ? newNode.leftNode.height : -1);
 				currentNode.leftNode = newNode;
 				break;
 			}
 		}
-		recalculateHeight = true;
+		while(!stack.isEmpty()) {
+			currentNode = stack.pop();
+			currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
+		}
 	}
 	
 	public void insertAsRightChildOf(T parent, T dataToInsert) {
 		if(isEmpty())
 			return;
 		
+		Stack<TreeNode<T>> stack = new Stack();
 		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
 			currentNode = iterator.next();
+			stack.push(currentNode);
 			if(currentNode.data.equals(parent)) {
 				TreeNode<T> newNode = new TreeNode<T>(currentNode.rightNode, dataToInsert, null);
+				newNode.height = 1 + (newNode.leftNode != null ? newNode.leftNode.height : -1);
 				currentNode.rightNode = newNode;
 				break;
 			}
 		}
-		recalculateHeight = true;
+		while(!stack.isEmpty()) {
+			currentNode = stack.pop();
+			currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
+		}
 	}
 	
 	public void deleteLeftChildOf(T parent) {
 		if(isEmpty())
 			return;
 		
+		Stack<TreeNode<T>> stack = new Stack();
 		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
@@ -77,14 +99,19 @@ public class BinaryTree<T> implements Tree<T> {
 				currentNode.leftNode = null;
 				break;
 			}
+			stack.push(currentNode);
 		}
-		recalculateHeight = true;
+		while(!stack.isEmpty()) {
+			currentNode = stack.pop();
+			currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
+		}
 	}
 	
 	public void deleteRightChildOf(T parent) {
 		if(isEmpty())
 			return;
 		
+		Stack<TreeNode<T>> stack = new Stack();
 		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		TreeNode<T> currentNode = null;
 		while(iterator.hasNext()) {
@@ -93,8 +120,12 @@ public class BinaryTree<T> implements Tree<T> {
 				currentNode.rightNode = null;
 				break;
 			}
+			stack.push(currentNode);
 		}
-		recalculateHeight = true;
+		while(!stack.isEmpty()) {
+			currentNode = stack.pop();
+			currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
+		}
 	}
 
 	@Override
@@ -102,6 +133,7 @@ public class BinaryTree<T> implements Tree<T> {
 		if(isEmpty())
 			return;
 		
+		Stack<TreeNode<T>> stack = new Stack();
 		LevelOrderIterator<T> iterator = new LevelOrderIterator<T>(root);
 		TreeNode<T> nodeToDelete = null; //Node to delete
 		TreeNode<T> deepestRightMostNode = null; //Deepest rightmost node
@@ -110,12 +142,16 @@ public class BinaryTree<T> implements Tree<T> {
 			if(node.data.equals(data)) {
 				nodeToDelete = node;
 			}
+			stack.push(node);
 		}
 		
 		if(nodeToDelete != null) {
 			nodeToDelete.data = deepestRightMostNode.data;
 			deleteLeafNode(deepestRightMostNode);
-			recalculateHeight = true;
+			while(!stack.isEmpty()) {
+				TreeNode<T> currentNode = stack.pop();
+				currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
+			}
 		}
 		
 	}
@@ -229,10 +265,6 @@ public class BinaryTree<T> implements Tree<T> {
 
 	@Override
 	public int getHeightOf(T data) {
-		if(recalculateHeight) {
-			BinaryTreeUtils.calculateHeightOfAllNodesOfTree(root);
-			recalculateHeight = false;
-		}
 		int currentNodeHeight = -1;
 		TreeNode<T> currentNode = searchNodeWithData(data);
 		if(currentNode != null)
