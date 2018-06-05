@@ -7,7 +7,7 @@ import kar.ds.stack.Stack;
 
 public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 
-	private TreeNode<T> root;
+	protected TreeNode<T> root;
 
 	@Override
 	public void insert(T data) {
@@ -16,6 +16,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 		}else {
 			TreeNode<T> currentNode = root;
 			Stack<TreeNode<T>> stack = new Stack();
+			stack.push(currentNode);
 			while(currentNode != null) {
 				int x = data.compareTo(currentNode.data);
 				if(x < 0) {
@@ -24,8 +25,8 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 						currentNode.height = 1 + Math.max(currentNode.leftNode.height, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
 						break;
 					}else {
-						stack.push(currentNode);
 						currentNode = currentNode.leftNode;
+						stack.push(currentNode);
 					}
 				}else if(x > 0) {
 					if(currentNode.rightNode == null) {
@@ -33,17 +34,27 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 						currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode.height);
 						break;
 					}else {
-						stack.push(currentNode);
 						currentNode = currentNode.rightNode;
+						stack.push(currentNode);
 					}
 				}
 			}
 			
-			while(!stack.isEmpty()) {
-				currentNode = stack.pop();
-				currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
-			}
+			calculateHeightOfAncestralNodes(stack);
 		}
+		
+	}
+	
+	private void calculateHeightOfAncestralNodes(Stack<TreeNode<T>> ancestralNodes) {
+		while(!ancestralNodes.isEmpty()) {
+			TreeNode<T> ancestralNode = ancestralNodes.pop();
+			ancestralNode.height = 1 + Math.max(ancestralNode.leftNode != null ? ancestralNode.leftNode.height : -1, ancestralNode.rightNode != null ? ancestralNode.rightNode.height : -1);
+			
+			rebalanceTree(ancestralNode, ancestralNodes.peek());
+		}
+	}
+	
+	protected void rebalanceTree(TreeNode<T> rootNode, TreeNode<T> parentNode) {
 		
 	}
 
@@ -100,10 +111,7 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 					parentNode.rightNode.data = minNode.data;
 			}
 			
-			while(!stack.isEmpty()) {
-				currentNode = stack.pop();
-				currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
-			}
+			calculateHeightOfAncestralNodes(stack);
 		}
 	}
 	
