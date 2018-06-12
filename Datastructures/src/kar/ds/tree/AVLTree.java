@@ -46,32 +46,18 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
 		TreeNode<T> temp = node.rightNode;
 		node.rightNode = temp.leftNode;
 		temp.leftNode = node;
+		node.height = 1 + Math.max(node.leftNode != null ? node.leftNode.height : -1, node.rightNode != null ? node.rightNode.height : -1);
+		temp.height = 1 + Math.max(temp.leftNode != null ? temp.leftNode.height : -1, temp.rightNode != null ? temp.rightNode.height : -1);
 		return temp;
-		/*if(parentNode == null) {
-			root = node.rightNode;
-			node.rightNode = root.leftNode;
-			root.leftNode = node;
-		}else {
-			parentNode.rightNode = node.rightNode;
-			node.rightNode = parentNode.rightNode.leftNode;
-			parentNode.rightNode.leftNode = node;
-		}*/
 	}
 	
 	private TreeNode<T> rotateRight(TreeNode<T> node) {
 		TreeNode<T> temp = node.leftNode;
 		node.leftNode = temp.rightNode;
 		temp.rightNode = node;
+		node.height = 1 + Math.max(node.leftNode != null ? node.leftNode.height : -1, node.rightNode != null ? node.rightNode.height : -1);
+		temp.height = 1 + Math.max(temp.leftNode != null ? temp.leftNode.height : -1, temp.rightNode != null ? temp.rightNode.height : -1);
 		return temp;
-		/*if(parentNode == null) {
-			root = node.leftNode;
-			node.leftNode = root.rightNode;
-			root.rightNode = node;
-		}else {
-			TreeNode<T> temp = node.leftNode;
-			node.leftNode = temp.rightNode;
-			parentNode.leftNode.rightNode = node;
-		}*/
 	}
 
 }

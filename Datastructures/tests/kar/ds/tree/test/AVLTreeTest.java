@@ -48,7 +48,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {10,5,3,15,12,20}, tree);
 		assertInOrderContent(new Integer[] {3,5,10,12,15,20}, tree);
 		assertPostOrderContent(new Integer[] {3,5,12,20,15,10}, tree);
-		//assertHeights(new int[] {2,1,1,0,0,0}, tree);
+		assertHeights(new int[] {2,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -62,6 +62,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {28,10,5,3,15,12,20,30,32}, tree);
 		assertInOrderContent(new Integer[] {3,5,10,12,15,20,28,30,32}, tree);
 		assertPostOrderContent(new Integer[] {3,5,12,20,15,10,32,30,28}, tree);
+		assertHeights(new int[] {3,2,1,1,1,0,0,0,0}, tree);
 	}
 	
 	@Test
@@ -75,6 +76,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {12,10,5,15,13,20}, tree);
 		assertInOrderContent(new Integer[] {5,10,12,13,15,20}, tree);
 		assertPostOrderContent(new Integer[] {5,10,13,20,15,12}, tree);
+		assertHeights(new int[] {2,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -88,6 +90,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {28,12,10,5,15,13,20,30,32}, tree);
 		assertInOrderContent(new Integer[] {5,10,12,13,15,20,28,30,32}, tree);
 		assertPostOrderContent(new Integer[] {5,10,13,20,15,12,32,30,28}, tree);
+		assertHeights(new int[] {3,2,1,1,1,0,0,0,0},tree);
 	}
 	
 	@Test
@@ -101,6 +104,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {18,10,5,15,20,23}, tree);
 		assertInOrderContent(new Integer[] {5,10,15,18,20,23}, tree);
 		assertPostOrderContent(new Integer[] {5,15,10,23,20,18}, tree);
+		assertHeights(new int[] {2,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -114,6 +118,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {4,3,2,18,10,5,15,20,23}, tree);
 		assertInOrderContent(new Integer[] {2,3,4,5,10,15,18,20,23}, tree);
 		assertPostOrderContent(new Integer[] {2,3,5,15,10,23,20,18,4}, tree);
+		assertHeights(new int[] {3,1,2,0,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -127,6 +132,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {15,10,5,13,18,20}, tree);
 		assertInOrderContent(new Integer[] {5,10,13,15,18,20}, tree);
 		assertPostOrderContent(new Integer[] {5,13,10,20,18,15}, tree);
+		assertHeights(new int[] {2,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -140,6 +146,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {4,3,2,15,10,5,13,18,20}, tree);
 		assertInOrderContent(new Integer[] {2,3,4,5,10,13,15,18,20}, tree);
 		assertPostOrderContent(new Integer[] {2,3,5,13,10,20,18,15,4}, tree);
+		assertHeights(new int[] {3,1,2,0,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -154,7 +161,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {10,5,3,15,12,20}, tree);
 		assertInOrderContent(new Integer[] {3,5,10,12,15,20}, tree);
 		assertPostOrderContent(new Integer[] {3,5,12,20,15,10}, tree);
-		//assertHeights(new int[] {2,1,1,0,0,0}, tree);
+		assertHeights(new int[] {2,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -169,6 +176,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {28,10,5,3,15,12,20,30,29,32,40}, tree);
 		assertInOrderContent(new Integer[] {3,5,10,12,15,20,28,29,30,32,40}, tree);
 		assertPostOrderContent(new Integer[] {3,5,12,20,15,10,29,40,32,30,28}, tree);
+		assertHeights(new int[] {3,2,2,1,1,0,1,0,0,0,0}, tree);
 	}
 	
 	@Test
@@ -183,6 +191,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {12,10,5,15,13,20}, tree);
 		assertInOrderContent(new Integer[] {5,10,12,13,15,20}, tree);
 		assertPostOrderContent(new Integer[] {5,10,13,20,15,12}, tree);
+		assertHeights(new int[] {2,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -197,6 +206,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {28,12,10,5,15,13,20,30,29,32,40}, tree);
 		assertInOrderContent(new Integer[] {5,10,12,13,15,20,28,29,30,32,40}, tree);
 		assertPostOrderContent(new Integer[] {5,10,13,20,15,12,29,40,32,30,28}, tree);
+		assertHeights(new int[] {3,2,2,1,1,0,1,0,0,0,0}, tree);
 	}
 	
 	@Test
@@ -211,6 +221,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {18,10,5,15,20,23}, tree);
 		assertInOrderContent(new Integer[] {5,10,15,18,20,23}, tree);
 		assertPostOrderContent(new Integer[] {5,15,10,23,20,18}, tree);
+		assertHeights(new int[] {2,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -225,6 +236,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {3,1,-1,0,2,18,10,5,15,20,23}, tree);
 		assertInOrderContent(new Integer[] {-1,0,1,2,3,5,10,15,18,20,23}, tree);
 		assertPostOrderContent(new Integer[] {0,-1,2,1,5,15,10,23,20,18,3}, tree);
+		assertHeights(new int[] {3,2,2,1,0,1,1,0,0,0,0}, tree);
 	}
 	
 	@Test
@@ -239,6 +251,7 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {15,10,5,13,18,20}, tree);
 		assertInOrderContent(new Integer[] {5,10,13,15,18,20}, tree);
 		assertPostOrderContent(new Integer[] {5,13,10,20,18,15}, tree);
+		assertHeights(new int[] {2,1,1,0,0,0}, tree);
 	}
 	
 	@Test
@@ -253,5 +266,6 @@ class AVLTreeTest {
 		assertPreOrderContent(new Integer[] {3,1,-1,0,2,15,10,5,13,18,20}, tree);
 		assertInOrderContent(new Integer[] {-1,0,1,2,3,5,10,13,15,18,20}, tree);
 		assertPostOrderContent(new Integer[] {0,-1,2,1,5,13,10,20,18,15,3}, tree);
+		assertHeights(new int[] {3,2,2,1,0,1,1,0,0,0,0}, tree);
 	}
 }
