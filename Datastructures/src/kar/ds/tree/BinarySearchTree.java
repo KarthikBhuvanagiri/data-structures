@@ -22,7 +22,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 				if(x < 0) {
 					if(currentNode.leftNode == null) {
 						currentNode.leftNode = new TreeNode<T>(null, data, null);
-						currentNode.height = 1 + Math.max(currentNode.leftNode.height, currentNode.rightNode != null ? currentNode.rightNode.height : -1);
 						break;
 					}else {
 						currentNode = currentNode.leftNode;
@@ -31,7 +30,6 @@ public class BinarySearchTree<T extends Comparable<T>> implements Tree<T> {
 				}else if(x > 0) {
 					if(currentNode.rightNode == null) {
 						currentNode.rightNode = new TreeNode<T>(null, data, null);
-						currentNode.height = 1 + Math.max(currentNode.leftNode != null ? currentNode.leftNode.height : -1, currentNode.rightNode.height);
 						break;
 					}else {
 						currentNode = currentNode.rightNode;
