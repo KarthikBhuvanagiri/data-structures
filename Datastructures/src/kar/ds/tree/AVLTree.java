@@ -39,7 +39,7 @@ public class AVLTree<T extends Comparable<T>> extends BinarySearchTree<T> {
 	private int getBalanceFactor(TreeNode<T> node) {
 		if(node == null)
 			return 0;
-		return (node.leftNode != null ? node.leftNode.height : -1) - (node.rightNode != null ? node.rightNode.height : -1); 
+		return (node.leftNode != null ? node.leftNode.height : 0) - (node.rightNode != null ? node.rightNode.height : 0); 
 	}
 	
 	private TreeNode<T> rotateLeft(TreeNode<T> node) {

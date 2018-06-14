@@ -268,4 +268,32 @@ class AVLTreeTest {
 		assertPostOrderContent(new Integer[] {0,-1,2,1,5,13,10,20,18,15,3}, tree);
 		assertHeights(new int[] {3,2,2,1,0,1,1,0,0,0,0}, tree);
 	}
+	
+	@Test
+	void testInsertNodesInDescendingOrder() {
+		Tree<Integer> tree = new AVLTree<>();
+		int[] nodes = new int[] {32,30,28,20,15,12,10,5,3};
+		for(int node : nodes) {
+			tree.insert(node);
+		}
+		assertLevelOrderContent(new Integer[] {12,10,28,5,15,30,3,20,32}, tree);
+		assertPreOrderContent(new Integer[] {12,10,5,3,28,15,20,30,32}, tree);
+		assertInOrderContent(new Integer[] {3,5,10,12,15,20,28,30,32}, tree);
+		assertPostOrderContent(new Integer[] {3,5,10,20,15,32,30,28,12}, tree);
+		assertHeights(new int[] {3,2,2,1,1,1,0,0,0}, tree);
+	}
+	
+	@Test
+	void testInsertNodesInAscendingOrder() {
+		Tree<Integer> tree = new AVLTree<>();
+		int[] nodes = new int[] {3,5,10,12,15,20,28,30,32};
+		for(int node : nodes) {
+			tree.insert(node);
+		}
+		assertLevelOrderContent(new Integer[] {20,10,28,5,15,30,3,12,32}, tree);
+		assertPreOrderContent(new Integer[] {20,10,5,3,15,12,28,30,32}, tree);
+		assertInOrderContent(new Integer[] {3,5,10,12,15,20,28,30,32}, tree);
+		assertPostOrderContent(new Integer[] {3,5,12,15,10,32,30,28,20}, tree);
+		assertHeights(new int[] {3,2,2,1,1,1,0,0,0}, tree);
+	}
 }
